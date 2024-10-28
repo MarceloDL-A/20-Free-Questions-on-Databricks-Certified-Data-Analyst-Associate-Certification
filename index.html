@@ -249,7 +249,7 @@
     let totalQuestions = 0;
     let categories = {};
     let totalAnswered = 0;
-    let currentTheme = 'Databricks_Certified_Data_Analyst_Associate_Exam';
+    let currentTheme = '20+ Free Questions on Databricks Certified Data Analyst Associate Certification';
     let studyData = {};  // Armazenar dados de estudo por dia
     
     // Temporizador
@@ -949,10 +949,11 @@ function hideTooltip() {
     
     // Carregar progresso ao carregar a página
     window.onload = function () {
-        loadCalendarProgress();  // Carrega o progresso salvo ao iniciar
+        loadCalendarProgress();
         loadQuestionsFromFile(currentTheme);
         updatePrompt(currentTheme);
-        generateStudyCalendar();  // Gera o calendário ao carregar a página
+        generateStudyCalendar();
+        updateQuizTitle(currentTheme);
     };
     
 </script>
