@@ -1,0 +1,392 @@
+[
+  {
+    "question": "What is the correct method to rename a table in Databricks?",
+    "options": [
+      "Use the ALTER TABLE RENAME TO command.",
+      "Update the table name through the Databricks UI.",
+      "Delete the old table and create a new one with the desired name.",
+      "Modify the table name in the metadata file.",
+      "Use the RENAME TABLE command."
+    ],
+    "answer": 0,
+    "category": "SQL",
+    "explanation": "The correct way to rename a table in Databricks is using the ALTER TABLE RENAME TO command, which changes the table's name directly."
+  },
+  {
+    "question": "In a Databricks SQL environment, you are tasked with analyzing sales data. You need to find all products that had their first sale amounting to more than $500. Which SQL query using a subquery appropriately retrieves this information?",
+    "options": [
+      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleDate = (SELECT MIN(SaleDate) FROM SalesRecords GROUP BY ProductID);",
+      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleID IN (SELECT MIN(SaleID) FROM SalesRecords GROUP BY ProductID);",
+      "SELECT DISTINCT ProductID FROM SalesRecords WHERE SaleAmount > 500 GROUP BY ProductID HAVING SaleDate = MIN(SaleDate);",
+      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleDate = (SELECT MIN(SaleDate) FROM SalesRecords WHERE ProductID = SalesRecords.ProductID);",
+      "SELECT ProductID FROM (SELECT ProductID, MIN(SaleDate) AS FirstSaleDate FROM SalesRecords GROUP BY ProductID) AS FirstSales WHERE FirstSaleDate > 500;"
+    ],
+    "answer": 3,
+    "category": "SQL",
+    "explanation": "The correct answer uses a subquery to find the minimum sale date for each ProductID where SaleAmount is over 500, filtering correctly based on the specific product's earliest sale."
+  },
+  {
+    "question": "When conducting a sophisticated analysis in data analytics, which activity best illustrates the thoughtful integration of varied datasets?",
+    "options": [
+      "Focusing exclusively on data from the system with the largest volume of data.",
+      "Deploying the latest machine learning algorithms without considering data sources.",
+      "Randomly alternating between systems for data retrieval to maintain diversity.",
+      "Separating datasets to preserve the uniqueness of each system's data.",
+      "Synchronizing and unifying data from diverse systems to ensure consistency in analytics."
+    ],
+    "answer": 4,
+    "category": "Data Integration",
+    "explanation": "Synchronizing and unifying data ensures consistency across analytics, which is essential for integrated data analysis."
+  },
+  {
+    "question": "In the context of Databricks, how is Personally Identifiable Information (PII) typically handled to ensure data privacy and compliance?",
+    "options": [
+      "By creating a separate database for PII.",
+      "Through the use of Delta Lake features for fine-grained access control.",
+      "By automatically encrypting all data fields that contain PII.",
+      "PII is not specifically handled in Databricks; it relies on external tools.",
+      "By anonymizing PII data through built-in Databricks functions."
+    ],
+    "answer": 1,
+    "category": "Data Security",
+    "explanation": "Delta Lake's fine-grained access control enables secure handling of PII by restricting access at a detailed level within Databricks."
+  },
+  {
+    "question": "In a Databricks dashboard designed to track regional sales data, an analyst introduces a parameter to select a specific region. This is an example of which behavior in a Databricks dashboard?",
+    "options": [
+      "The parameter serves as an input field for users to add new data.",
+      "The parameter solely adjusts the layout without changing the data displayed.",
+      "The parameter automatically recalculates the entire dataset for the new region, affecting the data source.",
+      "The parameter behaves as a dynamic filter, altering the scope of the data presented based on user selection.",
+      "The parameter functions as a decorative element, enhancing the visual appeal but not the data content."
+    ],
+    "answer": 3,
+    "category": "Dashboard Parameters",
+    "explanation": "In this context, the parameter acts as a dynamic filter, enabling the dashboard to display data specific to the selected region, without affecting the underlying dataset."
+  },
+  {
+    "question": "Regarding the accessibility and functionality of Databricks SQL dashboards, which statement best reflects their use in a business environment by various stakeholders?",
+    "options": [
+      "Only the original creator can view and run it.",
+      "Only data engineers and IT professionals can view and run it due to technical nature.",
+      "Dashboards are exclusively for top-level executives.",
+      "A variety of users, including analysts, managers, and stakeholders, can view and run for collaborative analysis.",
+      "Dashboards are publicly accessible with internet access, without any restrictions."
+    ],
+    "answer": 3,
+    "category": "Dashboard Accessibility",
+    "explanation": "Databricks SQL dashboards are designed for collaborative analysis, allowing a range of users to interact with the data, making it ideal for team-based environments."
+  },
+  {
+    "question": "As a data analyst, you are preparing to present your findings from a recent study. Which of the following steps aligns most closely with the initial phase of preparing your presentation in Databricks SQL?",
+    "options": [
+      "Drafting a preliminary report in a word processing software.",
+      "Designing an interactive frontend interface using HTML and CSS.",
+      "Developing a Python script to perform advanced statistical analysis.",
+      "Crafting a SQL query to gather and summarize the relevant data.",
+      "Scheduling meetings with stakeholders to discuss data interpretations."
+    ],
+    "answer": 3,
+    "category": "Data Presentation",
+    "explanation": "The initial phase involves crafting SQL queries to gather and summarize relevant data, which will serve as the basis for the presentation."
+  },
+  {
+    "question": "How is data enhancement commonly applied in analytics?",
+    "options": [
+      "By converting unstructured data into structured format for easier database storage.",
+      "Through cleaning and normalizing data to maintain consistency in databases.",
+      "By anonymizing sensitive information in datasets for privacy compliance.",
+      "By reducing the size of the dataset to improve processing speed.",
+      "By incorporating external data sources to enrich existing datasets for deeper insights."
+    ],
+    "answer": 4,
+    "category": "Data Enhancement",
+    "explanation": "Data enhancement often involves incorporating external data to provide deeper insights, enriching the original dataset with additional information."
+  },
+  {
+    "question": "Given a database with a table Orders, you want to retrieve the list of orders placed by a particular customer where the order amount is greater than $500. Which SQL query will correctly retrieve this data?",
+    "options": [
+      "DELETE FROM Orders WHERE CustomerId = 123 AND Amount > 500;",
+      "UPDATE Orders SET Amount = 500 WHERE CustomerId = 123;",
+      "SELECT OrderId FROM Orders WHERE CustomerId = 123 OR Amount > 500;",
+      "SELECT * FROM Orders WHERE CustomerId = 123 AND Amount > 500;",
+      "SELECT CustomerId, Amount FROM Orders WHERE OrderId = 123 AND Amount > 500;"
+    ],
+    "answer": 3,
+    "category": "SQL",
+    "explanation": "The query needs to select all fields where CustomerId is 123 and Amount is greater than 500, which is done with a SELECT * statement."
+  },
+  {
+    "question": "In Databricks, what is the impact on a dashboard if the configured refresh rate for the dashboard is set to be more frequent than the 'Auto Stop' setting of the SQL Warehouse?",
+    "options": [
+      "The warehouse automatically adjusts its 'Auto Stop' setting to match the dashboard's refresh rate.",
+      "The dashboard will continue to refresh at the set interval, the SQL Warehouse will continue running.",
+      "The dashboard will not be refreshed.",
+      "The dashboard will stop refreshing once the warehouse enters 'Auto Stop' mode, potentially leading to outdated data being displayed.",
+      "The warehouse's 'Auto Stop' setting is irrelevant, as the dashboard's refresh rate does not interact with warehouse settings."
+    ],
+    "answer": 3,
+    "category": "Dashboard Refresh",
+    "explanation": "When the warehouse enters 'Auto Stop' mode, the dashboard cannot refresh, which could result in outdated data."
+  },
+  {
+    "question": "In the context of Delta Lake tables in Databricks, how is historical data maintained, and what command is used to access this history?",
+    "options": [
+      "Delta Lake tables do not maintain historical data.",
+      "Historical data is maintained through versioned table updates, accessed with the DESCRIBE HISTORY command.",
+      "Historical data is maintained in separate snapshot tables, accessed with the SHOW SNAPSHOT command.",
+      "Historical data is stored in a dedicated audit log, accessed with the VIEW AUDIT LOG command.",
+      "Historical data is maintained through periodic backups, accessed with the SHOW BACKUP command."
+    ],
+    "answer": 1,
+    "category": "Delta Lake",
+    "explanation": "Delta Lake maintains historical data through versioned table updates, accessible via the DESCRIBE HISTORY command, which provides a record of changes."
+  },
+  {
+    "question": "Regarding the accessibility and functionality of Databricks SQL dashboards, which statement best reflects their use in a business environment by various stakeholders?",
+    "options": [
+      "Only the original creator can view and run it.",
+      "Only data engineers and IT professionals can view and run it due to technical nature.",
+      "Dashboards are exclusively for top-level executives.",
+      "A variety of users, including analysts, managers, and stakeholders, can view and run for collaborative analysis.",
+      "Dashboards are publicly accessible with internet access, without any restrictions."
+    ],
+    "answer": 3,
+    "category": "Dashboard Accessibility",
+    "explanation": "Databricks SQL dashboards are designed for collaborative analysis, allowing a range of users to interact with the data, making it ideal for team-based environments."
+  },
+  {
+    "question": "In Databricks, setting up a refresh schedule for dashboards is essential for ensuring that the displayed data is current. How does one configure a refresh schedule for a Databricks SQL dashboard?",
+    "options": [
+      "Sending periodic requests to the Databricks support team to refresh the dashboard.",
+      "Writing a custom script in the dashboard's SQL queries to automate refreshes.",
+      "Utilizing an external tool to trigger refreshes in the Databricks dashboard.",
+      "Manually updating the dashboard at regular intervals without any automated scheduling.",
+      "Click Schedule at the upper-right of the dashboard. Then, click Add schedule."
+    ],
+    "answer": 4,
+    "category": "Dashboard Configuration",
+    "explanation": "To set a refresh schedule, users can access the scheduling options within the dashboard interface, allowing automated updates."
+  },
+  {
+    "question": "Given two tables, Customers and Orders, the resulting joined table has NULLs for customers without orders. What type of JOIN was used?",
+    "options": [
+      "LEFT JOIN",
+      "INNER JOIN",
+      "ANTI JOIN",
+      "CROSS JOIN",
+      "FULL JOIN"
+    ],
+    "answer": 0,
+    "category": "SQL JOIN",
+    "explanation": "A LEFT JOIN includes all records from the left table (Customers) and matches them with the right table (Orders), filling in NULLs where there are no matches."
+  },
+  {
+    "question": "In a Databricks dashboard designed to track regional sales data, an analyst introduces a parameter to select a specific region. This is an example of which behavior in a Databricks dashboard?",
+    "options": [
+      "The parameter serves as an input field for users to add new data.",
+      "The parameter solely adjusts the layout without changing the data displayed.",
+      "The parameter automatically recalculates the entire dataset for the new region, affecting the data source.",
+      "The parameter behaves as a dynamic filter, altering the scope of the data presented based on user selection.",
+      "The parameter functions as a decorative element, enhancing the visual appeal but not the data content."
+    ],
+    "answer": 3,
+    "category": "Dashboard Parameters",
+    "explanation": "In this context, the parameter acts as a dynamic filter, enabling the dashboard to display data specific to the selected region, without affecting the underlying dataset."
+  },
+  {
+    "question": "A data analyst is creating a dashboard to present monthly sales data to company executives. After changes, the executives find the dashboard more informative. This scenario illustrates which of the following points about visualization formatting?",
+    "options": [
+      "Formatting is primarily used to reduce the size of the data set visually displayed.",
+      "Formatting changes the underlying data, thus altering the data's interpretation.",
+      "Over-formatting can lead to data misinterpretation by introducing visual biases.",
+      "Proper formatting can enhance readability and comprehension, leading to a more accurate interpretation of the data.",
+      "Formatting only affects the aesthetic aspect of the visualization and has no impact on its reception."
+    ],
+    "answer": 3,
+    "category": "Data Visualization",
+    "explanation": "Proper formatting improves readability and comprehension, enabling stakeholders to interpret the data more accurately."
+  },
+  {
+    "question": "In a Databricks SQL environment, you are tasked with analyzing sales data. You need to find all products that had their first sale amounting to more than $500. Which SQL query using a subquery appropriately retrieves this information?",
+    "options": [
+      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleDate = (SELECT MIN(SaleDate) FROM SalesRecords GROUP BY ProductID);",
+      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleID IN (SELECT MIN(SaleID) FROM SalesRecords GROUP BY ProductID);",
+      "SELECT DISTINCT ProductID FROM SalesRecords WHERE SaleAmount > 500 GROUP BY ProductID HAVING SaleDate = MIN(SaleDate);",
+      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleDate = (SELECT MIN(SaleDate) FROM SalesRecords WHERE ProductID = SalesRecords.ProductID);",
+      "SELECT ProductID FROM (SELECT ProductID, MIN(SaleDate) AS FirstSaleDate FROM SalesRecords GROUP BY ProductID) AS FirstSales WHERE FirstSaleDate > 500;"
+    ],
+    "answer": 3,
+    "category": "SQL",
+    "explanation": "The correct answer uses a subquery to find the minimum sale date for each ProductID where SaleAmount is over 500, filtering correctly based on the specific product's earliest sale."
+  },
+  {
+    "question": "In the context of Delta Lake tables in Databricks, how is historical data maintained, and what command is used to access this history?",
+    "options": [
+      "Delta Lake tables do not maintain historical data.",
+      "Historical data is maintained through versioned table updates, accessed with the DESCRIBE HISTORY command.",
+      "Historical data is maintained in separate snapshot tables, accessed with the SHOW SNAPSHOT command.",
+      "Historical data is stored in a dedicated audit log, accessed with the VIEW AUDIT LOG command.",
+      "Historical data is maintained through periodic backups, accessed with the SHOW BACKUP command."
+    ],
+    "answer": 1,
+    "category": "Delta Lake",
+    "explanation": "Delta Lake maintains historical data through versioned table updates, accessible via the DESCRIBE HISTORY command, which provides a record of changes."
+  },
+  {
+    "question": "When conducting a sophisticated analysis in data analytics, which activity best illustrates the thoughtful integration of varied datasets?",
+    "options": [
+      "Focusing exclusively on data from the system with the largest volume of data.",
+      "Deploying the latest machine learning algorithms without considering data sources.",
+      "Randomly alternating between systems for data retrieval to maintain diversity.",
+      "Separating datasets to preserve the uniqueness of each system's data.",
+      "Synchronizing and unifying data from diverse systems to ensure consistency in analytics."
+    ],
+    "answer": 4,
+    "category": "Data Integration",
+    "explanation": "Synchronizing and unifying data ensures consistency across analytics, which is essential for integrated data analysis."
+  },
+  {
+    "question": "How would you write a SQL query to list each product_id and its corresponding quantity for every order from a nested JSON array in Databricks?",
+    "options": [
+      "SELECT EXPLODE(order_info:items) AS (product_id, quantity) FROM customer_orders;",
+      "SELECT order_info:items[*].product_id, order_info:items[*].quantity FROM customer_orders UNNEST items;",
+      "SELECT FLATTEN(order_info:items.product_id, order_info:items.quantity) FROM customer_orders;",
+      "SELECT order_info:items.product_id, order_info:items.quantity FROM customer_orders;",
+      "SELECT order_info:items[*].product_id, order_info:items[*].quantity FROM customer_orders;"
+    ],
+    "answer": 0,
+    "category": "SQL JSON",
+    "explanation": "Using EXPLODE is the correct approach to handle nested JSON arrays and extract the product_id and quantity for each order in Databricks."
+  },
+  {
+    "question": "You are using Databricks to load data from a CSV file into a Delta table named SalesData. Which Databricks SQL COPY INTO command correctly imports this data?",
+    "options": [
+      "COPY INTO SalesData FROM CSV 'dbfs:/data/sales.csv' WITH HEADER;",
+      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' USING FORMAT AS CSV HEADER = TRUE;",
+      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' FORMAT = CSV FORMAT_OPTIONS ('header' = 'true');",
+      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' FILEFORMAT = 'CSV';",
+      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' USING (FILEFORMAT = CSV, HEADER = 'true');"
+    ],
+    "answer": 4,
+    "category": "Data Import",
+    "explanation": "The correct syntax for importing with a header row in Databricks SQL is to use FILEFORMAT and HEADER options in the COPY INTO command."
+  },
+  {
+    "question": "In Databricks, how does the persistence of data differ between a view and a temporary view?",
+    "options": [
+      "Both views and temporary views do not store data physically, but a view persists beyond the session.",
+      "A view stores data physically, whereas a temporary view only exists during the session.",
+      "A view is session-specific, while a temporary view persists across sessions.",
+      "Temporary views allow data modifications, unlike regular views.",
+      "Both views and temporary views store data physically in the workspace."
+    ],
+    "answer": 0,
+    "category": "SQL Views",
+    "explanation": "Views persist beyond the session while temporary views exist only within the session without storing data physically."
+  },
+  {
+    "question": "Which of the following is a critical organization-specific consideration when handling PII data?",
+    "options": [
+      "Adapting PII data handling protocols to comply with regional and sector-specific privacy laws.",
+      "Developing a uniform public access policy for all PII data.",
+      "Implementing a one-size-fits-all approach to PII data storage and processing.",
+      "Prioritizing cost-saving measures over data security for PII data.",
+      "Always using the same encryption method for PII data across all departments."
+    ],
+    "answer": 0,
+    "category": "Data Privacy",
+    "explanation": "Complying with regional and sector-specific privacy laws is crucial to handle PII data appropriately, ensuring adherence to varying legal requirements."
+  },
+  {
+    "question": "How would you write a SQL query to list each product_id and its corresponding quantity for every order from a nested JSON array in Databricks?",
+    "options": [
+      "SELECT EXPLODE(order_info:items) AS (product_id, quantity) FROM customer_orders;",
+      "SELECT order_info:items[*].product_id, order_info:items[*].quantity FROM customer_orders UNNEST items;",
+      "SELECT FLATTEN(order_info:items.product_id, order_info:items.quantity) FROM customer_orders;",
+      "SELECT order_info:items.product_id, order_info:items.quantity FROM customer_orders;",
+      "SELECT order_info:items[*].product_id, order_info:items[*].quantity FROM customer_orders;"
+    ],
+    "answer": 0,
+    "category": "SQL JSON",
+    "explanation": "Using EXPLODE is the correct approach to handle nested JSON arrays and extract the product_id and quantity for each order in Databricks."
+  },
+  {
+    "question": "In Databricks, a data analyst is working on a dashboard and wants to ensure a consistent color scheme across all visualizations. Which approach should the analyst take?",
+    "options": [
+      "Export the dashboard data to a third-party tool for color adjustments, then re-import it.",
+      "Use a dashboard-wide setting that allows the analyst to apply a uniform color scheme to all visualizations simultaneously.",
+      "Implement a script in the dashboard code to automatically adjust the colors of all visualizations.",
+      "Manually adjust the color settings in each individual visualization to match the desired scheme.",
+      "Change the default color settings in the Databricks user preferences to automatically apply to all dashboards and visualizations."
+    ],
+    "answer": 1,
+    "category": "Databricks Dashboard",
+    "explanation": "A dashboard-wide setting is the most efficient way to ensure a uniform color scheme without needing to adjust each visualization manually."
+  },
+  {
+    "question": "In Databricks, a data analyst is working on a dashboard and wants to ensure a consistent color scheme across all visualizations. Which approach should the analyst take?",
+    "options": [
+      "Export the dashboard data to a third-party tool for color adjustments, then re-import it.",
+      "Use a dashboard-wide setting that allows the analyst to apply a uniform color scheme to all visualizations simultaneously.",
+      "Implement a script in the dashboard code to automatically adjust the colors of all visualizations.",
+      "Manually adjust the color settings in each individual visualization to match the desired scheme.",
+      "Change the default color settings in the Databricks user preferences to automatically apply to all dashboards and visualizations."
+    ],
+    "answer": 1,
+    "category": "Databricks Dashboard",
+    "explanation": "A dashboard-wide setting is the most efficient way to ensure a uniform color scheme without needing to adjust each visualization manually."
+  },
+  {
+    "question": "Given two tables, Customers and Orders, the resulting joined table has NULLs for customers without orders. What type of JOIN was used?",
+    "options": [
+      "LEFT JOIN",
+      "INNER JOIN",
+      "ANTI JOIN",
+      "CROSS JOIN",
+      "FULL JOIN"
+    ],
+    "answer": 0,
+    "category": "SQL JOIN",
+    "explanation": "A LEFT JOIN includes all records from the left table (Customers) and matches them with the right table (Orders), filling in NULLs where there are no matches."
+  },
+  {
+    "question": "What are the essential steps to execute a basic SQL query in Databricks?",
+    "options": [
+      "Manually enter data into Databricks tables, write a SQL query in a text file, and use an external tool to execute the query.",
+      "Import data into a Databricks dataset, use a BI tool to run the SQL query, and export the results to a CSV file.",
+      "Create a data frame in Python or Scala, apply a SQL query to the data frame, and display the results.",
+      "Open SQL Editor, select a SQL warehouse, specify the query, run the query.",
+      "Write a SQL query in a Databricks notebook, validate the syntax, execute the query, and view the results."
+    ],
+    "answer": 4,
+    "category": "SQL Execution",
+    "explanation": "The essential steps in Databricks for executing a SQL query involve writing it in a notebook, validating syntax, executing, and then viewing results."
+  },
+  {
+    "question": "What is the correct method to rename a table in Databricks?",
+    "options": [
+      "Use the ALTER TABLE RENAME TO command.",
+      "Update the table name through the Databricks UI.",
+      "Delete the old table and create a new one with the desired name.",
+      "Modify the table name in the metadata file.",
+      "Use the RENAME TABLE command."
+    ],
+    "answer": 0,
+    "category": "SQL",
+    "explanation": "The correct way to rename a table in Databricks is using the ALTER TABLE RENAME TO command, which changes the table's name directly."
+  },
+  {
+    "question": "Given a database with a table Orders, you want to retrieve the list of orders placed by a particular customer where the order amount is greater than $500. Which SQL query will correctly retrieve this data?",
+    "options": [
+      "DELETE FROM Orders WHERE CustomerId = 123 AND Amount > 500;",
+      "UPDATE Orders SET Amount = 500 WHERE CustomerId = 123;",
+      "SELECT OrderId FROM Orders WHERE CustomerId = 123 OR Amount > 500;",
+      "SELECT * FROM Orders WHERE CustomerId = 123 AND Amount > 500;",
+      "SELECT CustomerId, Amount FROM Orders WHERE OrderId = 123 AND Amount > 500;"
+    ],
+    "answer": 3,
+    "category": "SQL",
+    "explanation": "The query needs to select all fields where CustomerId is 123 and Amount is greater than 500, which is done with a SELECT * statement."
+  }
+]

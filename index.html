@@ -124,6 +124,17 @@
         pointer-events: none; /* Evita interação com o mouse */
         z-index: 1000;  /* Coloca a tooltip acima de outros elementos */
     }
+    #theme-input {
+        width: 100%; /* Aumenta a largura do input */
+        padding: 10px;
+        font-size: 1em; /* Ajusta o tamanho da fonte */
+    }
+    
+    datalist option {
+        width: auto; /* Permite a largura automática para os itens */
+        white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+    }
+    
     
     .tooltip.show {
         opacity: 1;  /* Torna visível a tooltip */
@@ -205,7 +216,11 @@
             <h2>Alterar Tema do Quiz</h2>
             <p class="instructions">Selecione ou insira um novo tema abaixo. O quiz carregará questões de um arquivo JSON nomeado no formato <strong>questions_[tema].json</strong>. Por exemplo, se o tema for 'Google', o arquivo deve ser nomeado <strong>questions_Google.json</strong>.</p>
             <input type="text" id="theme-input" placeholder="Digite ou escolha um tema" onfocus="populateThemes()" list="theme-select" onchange="applyNewTheme()">
-            <datalist id="theme-select"></datalist>
+            <label for="theme-select">Escolha um tema:</label>
+<select id="theme-select" onchange="applyNewTheme()">
+    <!-- As opções serão carregadas dinamicamente pelo JavaScript -->
+</select>
+
             <p id="filename-suggestion">Nome do arquivo atual: <strong>questions_Databricks_Certified_Data_Analyst_Associate_Exam.json</strong></p>
             <button id="apply-button" onclick="applyNewTheme()">Aplicar Novo Tema</button>
 
@@ -249,7 +264,7 @@
     let totalQuestions = 0;
     let categories = {};
     let totalAnswered = 0;
-    let currentTheme = '20+ Free Questions on Databricks Certified Data Analyst Associate Certification';
+    let currentTheme = 'Databricks_Certified_Data_Analyst_Associate_Exam';
     let studyData = {};  // Armazenar dados de estudo por dia
     
     // Temporizador
@@ -945,15 +960,48 @@ function hideTooltip() {
     tooltip.classList.remove('show');  // Esconde a tooltip
 }
 
+
+
+
+
+async function populateThemes() {
+    try {
+        const response = await fetch('themes.json'); // Carrega o arquivo JSON com a lista de temas
+        const themes = await response.json(); // Converte o conteúdo para JSON
+
+        const select = document.getElementById('theme-select');
+        select.innerHTML = ''; // Limpa as opções atuais
+
+        themes.forEach(theme => {
+            const option = document.createElement('option');
+            option.value = theme;
+            option.textContent = theme; // Adiciona cada tema como opção
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Erro ao carregar temas:', error);
+    }
+}
+
+// Ajuste a função applyNewTheme para o <select>
+function applyNewTheme() {
+    const theme = document.getElementById('theme-select').value;
+    const filename = `questions_${theme.replace(/\s+/g, '_')}.json`;
+    document.getElementById('filename-suggestion').innerText = `Nome do arquivo atual: ${filename}`;
+    loadQuestionsFromFile(theme);
+}
+
+
+
+
     // --------------- Inicialização ---------------
     
     // Carregar progresso ao carregar a página
     window.onload = function () {
-        loadCalendarProgress();
+        loadCalendarProgress();  // Carrega o progresso salvo ao iniciar
         loadQuestionsFromFile(currentTheme);
         updatePrompt(currentTheme);
-        generateStudyCalendar();
-        updateQuizTitle(currentTheme);
+        generateStudyCalendar();  // Gera o calendário ao carregar a página
     };
     
 </script>
