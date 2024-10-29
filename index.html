@@ -742,14 +742,21 @@ function disableTimer() {
         }
     }
     
+
+
+
+    
+    
+
+
     // Função para adicionar novas questões manualmente via JSON
     function addQuestions() {
         const content = document.getElementById('json-content').value.trim();
         let newThemeInput = document.getElementById('theme-input').value.trim();
     
-        // Se o campo de tema estiver vazio, define um tema padrão
+        // Se o campo de tema estiver vazio, mantém o tema atual
         if (!newThemeInput) {
-            newThemeInput = 'Databricks Certified Data Analyst Associate Exam';
+            newThemeInput = currentTheme;
         }
     
         if (!content) {
@@ -758,32 +765,63 @@ function disableTimer() {
         }
     
         try {
-            const newQuestions = JSON.parse(content); // Tenta analisar o conteúdo JSON inserido
+            const newQuestions = JSON.parse(content);
     
             if (!Array.isArray(newQuestions) || newQuestions.length === 0) {
                 alert('O conteúdo JSON inserido não parece ser uma lista válida de questões.');
                 return;
             }
     
-            // Mescla as novas questões com as existentes
-            questions = shuffleQuestions([...questions, ...newQuestions]);
-            originalQuestions = [...questions]; // Atualiza o array original também
+            const sanitizedNewQuestions = sanitizeQuestions(newQuestions);
     
-            // Atualiza a interface do quiz com as novas questões
+            const uniqueNewQuestions = sanitizedNewQuestions.filter(newQ => !isQuestionDuplicate(newQ, originalQuestions));
+    
+            if (uniqueNewQuestions.length === 0) {
+                alert('Todas as questões inseridas já existem no quiz.');
+                return;
+            }
+    
+            questions = shuffleQuestions([...questions, ...uniqueNewQuestions]);
+            originalQuestions = [...originalQuestions, ...uniqueNewQuestions];
+    
             currentTheme = newThemeInput;
             totalQuestions = questions.length;
-            updateAvailableTopics(); // Atualiza os tópicos exibidos
+            updateAvailableTopics();
             document.getElementById('total-questions-count').innerText = totalQuestions;
-            document.getElementById('question-slider').max = totalQuestions; // Ajusta o controle deslizante
+            document.getElementById('question-slider').max = totalQuestions;
     
-            alert(`Novas questões para o tema ${currentTheme} foram adicionadas com sucesso!`);
+            alert(`${uniqueNewQuestions.length} novas questões foram adicionadas ao tema ${currentTheme}.`);
         } catch (error) {
             alert('Ocorreu um erro ao tentar adicionar as questões. Certifique-se de que o conteúdo JSON está correto.');
             console.error('Erro ao analisar JSON:', error);
         }
     }
     
+
+
+    function normalizeText(text) {
+        return text
+            .normalize('NFD') // Decompõe caracteres acentuados
+            .replace(/[\u0300-\u036f]/g, '') // Remove os diacríticos
+            .replace(/[^a-zA-Z0-9 ]/g, '') // Remove caracteres especiais
+            .toLowerCase()
+            .trim();
+    }
     
+    function isQuestionDuplicate(newQuestion, existingQuestions) {
+        const newQText = normalizeText(newQuestion.question);
+        return existingQuestions.some(q => normalizeText(q.question) === newQText);
+    }
+    
+    
+    function sanitizeQuestions(questionsArray) {
+        return questionsArray.map(q => {
+            q.question = q.question.trim();
+            q.explanation = q.explanation.trim();
+            // Você pode adicionar mais sanitizações aqui, como remover caracteres especiais
+            return q;
+        });
+    }
     
     // Função para baixar o arquivo JSON atualizado
     function downloadUpdatedFile() {
