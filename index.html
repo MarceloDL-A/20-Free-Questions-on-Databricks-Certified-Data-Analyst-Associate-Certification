@@ -213,14 +213,16 @@
         <p id="total-questions-display">Número total de questões: <strong id="total-questions-count">0</strong></p>
 
         <div id="upload-section">
+       
             <h2>Alterar Tema do Quiz</h2>
             <p class="instructions">Selecione ou insira um novo tema abaixo. O quiz carregará questões de um arquivo JSON nomeado no formato <strong>questions_[tema].json</strong>. Por exemplo, se o tema for 'Google', o arquivo deve ser nomeado <strong>questions_Google.json</strong>.</p>
-            <input type="text" id="theme-input" placeholder="Digite ou escolha um tema" onfocus="populateThemes()" list="theme-select" onchange="applyNewTheme()">
-            <label for="theme-select">Escolha um tema:</label>
-<select id="theme-select" onchange="applyNewTheme()">
-    <!-- As opções serão carregadas dinamicamente pelo JavaScript -->
-</select>
-
+            
+            <!-- Campo de entrada com datalist para seleção de tema -->
+            <input type="text" id="theme-input" placeholder="Digite ou escolha um tema" list="theme-list" onchange="applyNewTheme()">
+            <datalist id="theme-list">
+                <!-- As opções serão carregadas dinamicamente pelo JavaScript -->
+            </datalist>
+            
             <p id="filename-suggestion">Nome do arquivo atual: <strong>questions_Databricks_Certified_Data_Analyst_Associate_Exam.json</strong></p>
             <button id="apply-button" onclick="applyNewTheme()">Aplicar Novo Tema</button>
 
@@ -257,23 +259,18 @@
 
     
  <script>
-    let questions = [];  // Array para armazenar as questões.
-    let originalQuestions = [];  // Armazena todas as perguntas carregadas inicialmente.
-    let currentQuestionIndex = 0;
-    let correctAnswers = 0;
-    let totalQuestions = 0;
-    let categories = {};
-    let totalAnswered = 0;
-    let currentTheme = 'Databricks_Certified_Data_Analyst_Associate_Exam';
-    let studyData = {};  // Armazenar dados de estudo por dia
-    
-    // Temporizador
-    let timerInterval;
-    let questionLimit = 45;
-    let timerMode = 'total';
-    let timePerQuestion = 120;
-    let totalTime = 90 * 60;
-    let timeLeft = 0;
+// Remova os acessos ao DOM fora de funções
+let questions = [];  // Array para armazenar as questões.
+let originalQuestions = [];  // Armazena todas as perguntas carregadas inicialmente.
+let currentQuestionIndex = 0;
+let correctAnswers = 0;
+let totalQuestions = 0;
+let questionLimit = 0;  // Inicialize questionLimit
+
+let categories = {};
+let totalAnswered = 0;
+let currentTheme = 'Databricks_Certified_Data_Analyst_Associate_Exam';
+let studyData = {};  // Armazenar dados de estudo por dia
     
     // --------------- Funções de Questões e Filtros ---------------
     
@@ -283,30 +280,43 @@ function loadQuestionsFromFile(theme) {
     fetch(sanitizedFilename)
         .then(response => {
             if (!response.ok) {
-                // Se o arquivo não existir, define as questões como uma lista vazia e cria um novo tema
                 questions = [];
                 originalQuestions = [];
                 alert(`Novo tema "${theme}" criado. Nenhuma questão disponível ainda.`);
             } else {
-                return response.json();  // Carrega o JSON do tema existente
+                return response.json();
             }
         })
         .then(data => {
             if (data) {
-                originalQuestions = [...data];  // Armazena as questões originais
-                questions = shuffleQuestions([...data]);  // Embaralha as questões carregadas
+                originalQuestions = [...data];
+                questions = shuffleQuestions([...data]);
                 totalQuestions = questions.length;
 
-                updateQuizUI();  // Atualiza a interface do quiz com o novo tema
-                
-                // Atualiza os tópicos disponíveis após carregar as questões
-                updateAvailableTopics();  
+                // Atualiza o questionLimit e o controle deslizante
+                questionLimit = totalQuestions;
+                document.getElementById('question-slider').max = totalQuestions;
+                document.getElementById('question-slider').value = totalQuestions;
+                document.getElementById('question-count').textContent = totalQuestions;
+
+                updateQuizUI();
+                updateAvailableTopics();
+            } else {
+                // Se não houver dados, assegura que as variáveis estão zeradas
+                totalQuestions = 0;
+                questionLimit = 0;
+                document.getElementById('total-questions-count').innerText = totalQuestions;
+                document.getElementById('question-count').textContent = questionLimit;
+                document.getElementById('question-slider').max = 0;
+                document.getElementById('question-slider').value = 0;
             }
         })
         .catch(error => {
             console.error("Erro ao carregar questões:", error);
         });
 }
+
+
 
 
 
@@ -523,7 +533,7 @@ function updateAvailableTopics() {
     // Função para atualizar o número de questões com a barra deslizante
     function updateQuestionCount(value) {
         document.getElementById('question-count').textContent = value;
-        questionLimit = Math.min(parseInt(value), totalQuestions);  // Limita o valor ao total de questões disponíveis
+        questionLimit = Math.min(questionLimit, totalQuestions);  // Ajusta o limite de questões selecionadas
         filterByTopic();  // Recarrega as perguntas de acordo com o novo limite
     }
     
@@ -640,10 +650,11 @@ function disableTimer() {
         document.getElementById('next-button').style.display = 'none';
     }
     
-    // Função para sanitizar nomes de arquivos
     function sanitizeFilename(filename) {
         return filename.replace(/[^\w\s]/gi, '').replace(/\s+/g, '_') + '.json';
     }
+    
+    
     
     
     // Função para registrar os estudos no calendário
@@ -689,32 +700,28 @@ function disableTimer() {
         }
     }
     
-    // Função para aplicar um novo tema de questões
     function applyNewTheme() {
         const newThemeInput = document.getElementById('theme-input').value.trim();
         if (newThemeInput) {
             currentTheme = newThemeInput;
-            resetStats();  // Reinicia as estatísticas quando um novo tema é aplicado
-            questions = [];  // Zera as questões antes de carregar o novo tema
-            originalQuestions = [];  // Também zera as questões originais
-            
-            // Zera o número total de questões e atualiza os displays relacionados
-            totalQuestions = 0;
-            questionLimit = 0;
-            document.getElementById('total-questions-count').innerText = totalQuestions;  // Atualiza o número total de questões
-            document.getElementById('question-count').innerText = questionLimit;  // Atualiza o número de questões do controle deslizante
-            document.getElementById('question-slider').value = 0;  // Reseta o controle deslizante
-            document.getElementById('question-slider').max = 0;  // Zera o valor máximo do controle deslizante
+            resetStats();
+            questions = [];
+            originalQuestions = [];
     
-            updateProgress();  // Zera a barra de progresso
-            loadQuestionsFromFile(currentTheme);  // Carrega o arquivo JSON do novo tema, ou cria um novo se não existir
-            updateQuizTitle(currentTheme);  // Atualiza o título do quiz
-            updatePrompt(currentTheme);  // Atualiza o prompt do GPT com o novo tema
-            document.getElementById('filename-suggestion').innerText = `Nome do arquivo atual: questions_${currentTheme}.json`;
+            // Atualiza o nome do arquivo baseado no tema
+            const filename = sanitizeFilename(`questions_${currentTheme}`);
+            document.getElementById('filename-suggestion').innerText = `Nome do arquivo atual: ${filename}`;
+    
+            updateProgress();
+            loadQuestionsFromFile(currentTheme);
+            updateQuizTitle(currentTheme);
+            updatePrompt(currentTheme);
         } else {
             alert('Por favor, insira um nome de tema válido.');
         }
     }
+    
+    
     
     
     
@@ -749,53 +756,60 @@ function disableTimer() {
     
 
 
-    // Função para adicionar novas questões manualmente via JSON
-    function addQuestions() {
-        const content = document.getElementById('json-content').value.trim();
-        let newThemeInput = document.getElementById('theme-input').value.trim();
-    
-        // Se o campo de tema estiver vazio, mantém o tema atual
-        if (!newThemeInput) {
-            newThemeInput = currentTheme;
-        }
-    
-        if (!content) {
-            alert('Por favor, insira um conteúdo de questão válido.');
+// Função para adicionar novas questões manualmente via JSON
+function addQuestions() {
+    const content = document.getElementById('json-content').value.trim();
+    let newThemeInput = document.getElementById('theme-input').value.trim();
+
+    // Se o campo de tema estiver vazio, mantém o tema atual
+    if (!newThemeInput) {
+        newThemeInput = currentTheme;
+    }
+
+    if (!content) {
+        alert('Por favor, insira um conteúdo de questão válido.');
+        return;
+    }
+
+    try {
+        const newQuestions = JSON.parse(content);
+
+        if (!Array.isArray(newQuestions) || newQuestions.length === 0) {
+            alert('O conteúdo JSON inserido não parece ser uma lista válida de questões.');
             return;
         }
-    
-        try {
-            const newQuestions = JSON.parse(content);
-    
-            if (!Array.isArray(newQuestions) || newQuestions.length === 0) {
-                alert('O conteúdo JSON inserido não parece ser uma lista válida de questões.');
-                return;
-            }
-    
-            const sanitizedNewQuestions = sanitizeQuestions(newQuestions);
-    
-            const uniqueNewQuestions = sanitizedNewQuestions.filter(newQ => !isQuestionDuplicate(newQ, originalQuestions));
-    
-            if (uniqueNewQuestions.length === 0) {
-                alert('Todas as questões inseridas já existem no quiz.');
-                return;
-            }
-    
-            questions = shuffleQuestions([...questions, ...uniqueNewQuestions]);
-            originalQuestions = [...originalQuestions, ...uniqueNewQuestions];
-    
-            currentTheme = newThemeInput;
-            totalQuestions = questions.length;
-            updateAvailableTopics();
-            document.getElementById('total-questions-count').innerText = totalQuestions;
-            document.getElementById('question-slider').max = totalQuestions;
-    
-            alert(`${uniqueNewQuestions.length} novas questões foram adicionadas ao tema ${currentTheme}.`);
-        } catch (error) {
-            alert('Ocorreu um erro ao tentar adicionar as questões. Certifique-se de que o conteúdo JSON está correto.');
-            console.error('Erro ao analisar JSON:', error);
+
+        const sanitizedNewQuestions = sanitizeQuestions(newQuestions);
+
+        const uniqueNewQuestions = sanitizedNewQuestions.filter(newQ => !isQuestionDuplicate(newQ, originalQuestions));
+
+        if (uniqueNewQuestions.length === 0) {
+            alert('Todas as questões inseridas já existem no quiz.');
+            return;
         }
+
+        questions = shuffleQuestions([...questions, ...uniqueNewQuestions]);
+        originalQuestions = [...originalQuestions, ...uniqueNewQuestions];
+
+        currentTheme = newThemeInput;
+        totalQuestions = questions.length;
+        updateAvailableTopics();
+        document.getElementById('total-questions-count').innerText = totalQuestions;
+
+        // Atualiza questionLimit e elementos do controle deslizante
+        questionLimit = Math.min(questionLimit, totalQuestions);
+
+        document.getElementById('question-slider').max = totalQuestions;
+        document.getElementById('question-slider').value = totalQuestions;
+        document.getElementById('question-count').textContent = totalQuestions;
+
+        alert(`${uniqueNewQuestions.length} novas questões foram adicionadas ao tema ${currentTheme}.`);
+    } catch (error) {
+        alert('Ocorreu um erro ao tentar adicionar as questões. Certifique-se de que o conteúdo JSON está correto.');
+        console.error('Erro ao analisar JSON:', error);
     }
+}
+    
     
 
 
@@ -1007,27 +1021,22 @@ async function populateThemes() {
         const response = await fetch('themes.json'); // Carrega o arquivo JSON com a lista de temas
         const themes = await response.json(); // Converte o conteúdo para JSON
 
-        const select = document.getElementById('theme-select');
-        select.innerHTML = ''; // Limpa as opções atuais
+        const dataList = document.getElementById('theme-list');
+        dataList.innerHTML = ''; // Limpa as opções atuais
 
         themes.forEach(theme => {
             const option = document.createElement('option');
-            option.value = theme;
-            option.textContent = theme; // Adiciona cada tema como opção
-            select.appendChild(option);
+            option.value = theme; // Adiciona cada tema como opção
+            dataList.appendChild(option);
         });
     } catch (error) {
         console.error('Erro ao carregar temas:', error);
     }
 }
 
-// Ajuste a função applyNewTheme para o <select>
-function applyNewTheme() {
-    const theme = document.getElementById('theme-select').value;
-    const filename = `questions_${theme.replace(/\s+/g, '_')}.json`;
-    document.getElementById('filename-suggestion').innerText = `Nome do arquivo atual: ${filename}`;
-    loadQuestionsFromFile(theme);
-}
+
+
+
 
 
 
