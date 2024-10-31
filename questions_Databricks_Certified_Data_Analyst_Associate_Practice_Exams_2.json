@@ -1,0 +1,197 @@
+[
+  {
+    "question": "In Databricks, how do you identify the owner of a table using Catalog Explorer?",
+    "options": [
+      "The owner is displayed when clicking on a table in the Catalog Explorer.",
+      "By inspecting the table's creation script in Catalog Explorer.",
+      "Through the 'Owner' column in the Catalog Explorer’s table list.",
+      "Table ownership is not visible in Catalog Explorer.",
+      "By executing a SQL query in Catalog Explorer to retrieve the table owner."
+    ],
+    "answer": 2,
+    "category": "Databricks Catalog",
+    "explanation": "The 'Owner' column in the table list of Catalog Explorer directly shows the ownership information."
+  },
+  {
+    "question": "In the context of Databricks, when dealing with the import of small text files, such as lookup tables or for quick data integrations, which approach is recommended to optimize performance and ease of use?",
+    "options": [
+      "Employ small-file upload techniques specifically designed for handling small text files efficiently.",
+      "Upload small text files to a temporary storage service before importing them into Databricks.",
+      "Always compress text files into larger archives before uploading, regardless of the original file size.",
+      "Utilize large-file upload methods for all types of data, regardless of file size.",
+      "Convert small text files to a binary format to increase upload speed and efficiency."
+    ],
+    "answer": 0,
+    "category": "Data Import",
+    "explanation": "Optimizing for small text files involves specific techniques that efficiently handle smaller data volumes without additional steps."
+  },
+  {
+    "question": "In the context of Databricks, there are distinct types of parameters used in dashboards and visualizations. Based on the descriptions provided, how do Widget Parameters, Dashboard Parameters, and Static Values differ in their application and impact?",
+    "options": [
+      "Widget Parameters are tied to a single visualization and affect only the query underlying that specific visualization. Dashboard Parameters can influence multiple visualizations within a dashboard and are configured at the dashboard level. Static Values are used to replace parameters, making them 'disappear' and setting a fixed value in place.",
+      "Dashboard Parameters are specific to individual visualizations and cannot be shared across multiple visualizations within a dashboard. Widget Parameters are used at the dashboard level to influence all visualizations. Static Values change dynamically in response to user interactions.",
+      "Both Widget Parameters and Dashboard Parameters have the same functionality and impact, allowing for dynamic changes across all visualizations in a dashboard. Static Values provide temporary placeholders for these parameters.",
+      "Static Values are used to create interactive elements in dashboards, while Widget and Dashboard Parameters are used for aesthetic modifications only, without impacting the data or queries.",
+      "Widget Parameters apply to the entire dashboard and can change the layout, whereas Dashboard Parameters are fixed and do not allow for interactive changes. Static Values are dynamic and change frequently based on user input."
+    ],
+    "answer": 0,
+    "category": "Dashboard Parameters",
+    "explanation": "Widget Parameters affect single visualizations, Dashboard Parameters can impact multiple visualizations at once, and Static Values lock in specific parameter values without user input."
+  },
+  {
+    "question": "In data analytics, identify a scenario where data enhancement would significantly improve the outcome.",
+    "options": [
+      "In a marketing campaign, to enrich customer data with additional demographic and psychographic information for targeted advertising.",
+      "When migrating data from one storage system to another without changing its format or content.",
+      "When performing routine data backup and recovery processes.",
+      "When aggregating large volumes of data for storage efficiency without analysis.",
+      "During the initial stages of data collection where data volume is more critical than data quality."
+    ],
+    "answer": 0,
+    "category": "Data Enhancement",
+    "explanation": "Data enhancement is valuable in targeted advertising because it enables more precise targeting by enriching customer data."
+  },
+  {
+    "question": "You are working with a sales data table in Databricks SQL that contains columns for Region, Product, and SalesAmount. You want to generate a report that includes the total sales amount for each combination of Region and Product, as well as the total for each Region and the overall total. Which SQL query would you use to achieve this?",
+    "options": [
+      "SELECT Region, Product, SUM(SalesAmount) FROM sales GROUP BY Region, Product WITH CUBE;",
+      "SELECT Region, Product, SUM(SalesAmount) FROM sales GROUP BY CUBE(Region, Product);",
+      "SELECT Region, Product, SUM(SalesAmount) FROM sales GROUP BY Region, Product WITH ROLLUP;",
+      "SELECT Region, Product, SUM(SalesAmount) FROM sales GROUP BY GROUPING SETS ((Region, Product), (Region), ());",
+      "SELECT Region, Product, SUM(SalesAmount) FROM sales GROUP BY ROLLUP(Region, Product);"
+    ],
+    "answer": 4,
+    "category": "SQL Aggregation",
+    "explanation": "ROLLUP provides subtotals for each level of grouping, as well as the overall total, making it ideal for hierarchical summaries."
+  },
+  {
+    "question": "In the context of Databricks dashboards, how do query parameters influence the output of underlying SQL queries within a dashboard?",
+    "options": [
+      "Query parameters serve as placeholders in SQL queries, allowing for dynamic data filtering based on user input, thus altering the output of the query according to the specified parameter values.",
+      "Query parameters are used to format the visual aspects of the output, such as color and font, without changing the actual data returned by the query.",
+      "They modify the layout of the dashboard, rearranging the visualizations based on user preferences, but do not change the data output of the queries.",
+      "Query parameters act as static reference points in SQL queries, ensuring that the output remains constant irrespective of user interactions.",
+      "They automatically update the SQL queries on a set schedule, such as daily or weekly, to change the output data based on temporal parameters."
+    ],
+    "answer": 0,
+    "category": "Dashboard Parameters",
+    "explanation": "Query parameters in Databricks dashboards allow for dynamic filtering, adjusting the data returned based on user input and thus making dashboards more interactive and customizable."
+  },
+  {
+    "question": "In the context of Databricks, what is the primary advantage of using a Serverless Databricks SQL endpoint/warehouse?",
+    "options": [
+      "It specializes in real-time data streaming and complex event processing for IoT applications.",
+      "It is primarily designed for large-scale machine learning workloads requiring extensive computational resources.",
+      "It provides a dedicated environment for developing complex data pipelines and ETL processes.",
+      "It enables quick-start capabilities, significantly reducing the time to initiate SQL queries and data analysis tasks.",
+      "It offers enhanced data security and privacy controls suitable for sensitive data processing."
+    ],
+    "answer": 3,
+    "category": "Databricks SQL",
+    "explanation": "Serverless SQL endpoints in Databricks are designed to quickly start SQL queries and data tasks without infrastructure management."
+  },
+  {
+    "question": "Consider two tables in a database:\n\nTable 1: Employees\n\n| EmployeeID | Name        | Department |\n|------------|-------------|------------|\n| 101        | Alan Smith  | HR         |\n| 102        | Betty Jones | Marketing  |\n| 103        | Carl Brown  | IT         |\n| 104        | Donna Ray   | Sales      |\n\nTable 2: Salaries\n\n| EmployeeID | Salary |\n|------------|--------|\n| 101        | 70000  |\n| 102        | 60000  |\n| 103        | 50000  |\n| 104        | 80000  |\n\nGiven the output of a join between the two tables:\n\n| Name       | Salary |\n|------------|--------|\n| Donna Ray  | 80000  |\n| Alan Smith | 70000  |\n\nWhich of the queries below could have been used to generate the output?",
+    "options": [
+      "SELECT E.Name, S.Salary FROM Employees E INNER JOIN Salaries S ON E.EmployeeID = S.EmployeeID WHERE S.Salary > (SELECT AVG(Salary) FROM Salaries) ORDER BY S.Salary DESC;",
+      "SELECT E.Name, S.Salary FROM Employees E INNER JOIN Salaries S ON E.EmployeeID = S.EmployeeID WHERE S.Salary >= (SELECT AVG(Salary) FROM Salaries) ORDER BY S.Salary DESC;",
+      "SELECT E.Name, S.Salary FROM Employees E INNER JOIN Salaries S ON E.EmployeeID = S.EmployeeID WHERE S.Salary > (SELECT AVG(Salary) FROM Salaries) ORDER BY S.Salary ASC;",
+      "SELECT * FROM Employees E INNER JOIN Salaries S ON E.EmployeeID = S.EmployeeID WHERE S.Salary > (SELECT AVG(Salary) FROM Salaries) ORDER BY S.Salary DESC;",
+      "SELECT E.Name, S.Salary FROM Employees E INNER JOIN Salaries S ON E.EmployeeID = S.EmployeeID WHERE S.Salary >= (SELECT MAX(Salary) FROM Salaries) ORDER BY S.Salary DESC;"
+    ],
+    "answer": 0,
+    "category": "SQL",
+    "explanation": "The correct query joins the Employees and Salaries tables on EmployeeID, filters salaries greater than the average salary, and orders the result by salary in descending order to match the output requirement. This produces only the rows for Donna Ray and Alan Smith, with their respective salaries of 80000 and 70000."
+  },
+  {
+    "question": "Consider two tables in a database: Employees and Salaries. Given the output of a join between these tables, which of the queries below could have been used to generate the output?",
+    "options": [
+      "SELECT e.Name, s.Salary FROM Employees e JOIN Salaries s ON e.EmployeeID = s.EmployeeID WHERE s.Salary > 60000;",
+      "SELECT e.Name, s.Salary FROM Employees e INNER JOIN Salaries s ON e.EmployeeID = s.EmployeeID WHERE s.Salary > 60000;",
+      "SELECT e.Name, s.Salary FROM Employees e LEFT JOIN Salaries s ON e.EmployeeID = s.EmployeeID WHERE s.Salary > 60000;",
+      "SELECT e.Name, s.Salary FROM Employees e RIGHT JOIN Salaries s ON e.EmployeeID = s.EmployeeID AND s.Salary > 60000;",
+      "SELECT e.Name, s.Salary FROM Employees e LEFT JOIN Salaries s ON e.EmployeeID = s.EmployeeID AND s.Salary > 60000;"
+    ],
+    "answer": 1,
+    "category": "SQL Joins",
+    "explanation": "The INNER JOIN is used to match rows where EmployeeID is present in both tables, filtering with the condition WHERE s.Salary > 60000 to display employees with salaries over 60,000."
+  },
+  {
+    "question": "In Databricks, what distinguishes a managed table from an unmanaged (external) table in terms of data and metadata management?",
+    "options": [
+      "Managed tables allow for external file storage, whereas unmanaged tables store data within the Databricks environment.",
+      "Managed tables store both data and metadata in the cloud, while unmanaged tables store only metadata.",
+      "Unmanaged tables enable ACID transactions, unlike managed tables.",
+      "Managed tables require manual data deletion after dropping the table, whereas unmanaged tables automatically delete data.",
+      "Managed tables have their data and metadata managed by Databricks, while unmanaged tables have only metadata managed."
+    ],
+    "answer": 4,
+    "category": "Table Management",
+    "explanation": "Databricks fully manages both data and metadata for managed tables, whereas for unmanaged tables only the metadata is managed."
+  },
+  {
+    "question": "In Databricks SQL, when alerts are configured based on specific criteria, how are notifications typically sent to inform users or administrators of the triggered alerts?",
+    "options": [
+      "Notifications are not supported for alerts in Databricks SQL Analytics.",
+      "Notifications are sent through SMS messages to designated phone numbers when alerts are triggered.",
+      "Notifications are automatically sent to the dashboard’s viewers via email when alerts are triggered.",
+      "Alerts generate a pop-up notification within the Databricks SQL Analytics interface, visible to all users.",
+      "Alerts trigger notifications via a variety of channels, such as email, Slack, or webhook integrations, based on the defined configuration."
+    ],
+    "answer": 4,
+    "category": "Databricks Alerts",
+    "explanation": "Databricks SQL Analytics allows notifications to be configured across multiple channels, including email and webhook integrations."
+  },
+  {
+    "question": "In Databricks SQL, which types of visualizations can be developed to represent data?",
+    "options": [
+      "Bar Chart, Line Graph, Heatmap, Gauge.",
+      "Table, Chart, Sankey Diagram, Scatter Plot.",
+      "Line Chart, Bubble Chart, Word Cloud, Counter.",
+      "Table, Details, Counter, Pivot.",
+      "Histogram, Radar Chart, Tree Map, Choropleth."
+    ],
+    "answer": 0,
+    "category": "Data Visualization",
+    "explanation": "Common visualization options in Databricks SQL include bar charts, line graphs, heatmaps, and gauges for representing data insights."
+  },
+  {
+    "question": "In data engineering, how is 'performing last-mile ETL as project-specific data enhancement' best described?",
+    "options": [
+      "Conducting final data transformations and enrichments specific to the needs of a particular project.",
+      "Performing initial data extraction from various source systems into a staging area.",
+      "Implementing general ETL processes applicable to all datasets across the organization.",
+      "Migrating all data to a centralized data warehouse for unified access.",
+      "Utilizing advanced data analytics techniques to generate predictive insights."
+    ],
+    "answer": 0,
+    "category": "ETL Processes",
+    "explanation": "Last-mile ETL focuses on final, specific transformations or enhancements tailored to individual project requirements, adding value to data at the end of the pipeline."
+  },
+  {
+    "question": "The Medallion Architecture in Databricks is a conceptual framework for data organization and pipeline management. How does it structure the data processing pipeline?",
+    "options": [
+      "It involves a single stage of data processing where raw, refined, and curated data are merged into a unified table known as the Platinum table.",
+      "It uses a reverse-pyramid structure starting with the most refined data in the base layer, moving to semi-processed data, and ending with raw data at the top.",
+      "None of the above.",
+      "It starts with unstructured data in Gold tables, then structures the data in Silver tables, and finally stores the raw data in Bronze tables.",
+      "It begins with raw data in Bronze tables, moves to refined data in Silver tables, and culminates in curated data in Gold tables."
+    ],
+    "answer": 4,
+    "category": "Medallion Architecture",
+    "explanation": "The Medallion Architecture in Databricks organizes data through a Bronze-Silver-Gold structure, progressing from raw data to curated data."
+  },
+  {
+    "question": "How do Delta Lake tables in Databricks maintain their historical data?",
+    "options": [
+      "By storing historical data in a separate cloud storage.",
+      "By maintaining a versioned history of data changes for a configurable period of time.",
+      "Delta Lake tables do not maintain historical data.",
+      "By creating a new table for each update.",
+      "Through automatic backups at regular intervals."
+    ],
+    "answer": 1,
+    "category": "Delta Lake",
+    "explanation": "Delta Lake uses versioning to track historical changes, allowing data retrieval from different points in time."
+  }
+]

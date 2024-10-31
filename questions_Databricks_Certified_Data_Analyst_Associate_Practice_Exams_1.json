@@ -1,18 +1,5 @@
 [
   {
-    "question": "What is the correct method to rename a table in Databricks?",
-    "options": [
-      "Use the ALTER TABLE RENAME TO command.",
-      "Update the table name through the Databricks UI.",
-      "Delete the old table and create a new one with the desired name.",
-      "Modify the table name in the metadata file.",
-      "Use the RENAME TABLE command."
-    ],
-    "answer": 0,
-    "category": "SQL",
-    "explanation": "The correct way to rename a table in Databricks is using the ALTER TABLE RENAME TO command, which changes the table's name directly."
-  },
-  {
     "question": "In Databricks, what is the impact on a dashboard if the configured refresh rate for the dashboard is set to be more frequent than the 'Auto Stop' setting of the SQL Warehouse?",
     "options": [
       "The warehouse automatically adjusts its 'Auto Stop' setting to match the dashboard's refresh rate.",
@@ -26,69 +13,17 @@
     "explanation": "When the warehouse enters 'Auto Stop' mode, the dashboard cannot refresh, which could result in outdated data."
   },
   {
-    "question": "When integrating Databricks SQL with popular visualization tools such as Tableau, Power BI, and Looker, which of the following steps is commonly involved in the connection process?",
+    "question": "In a Databricks Lakehouse, you are working with silver-level data that needs deduplication based on the customer_id and interaction_date columns. Which approach would be the most efficient for cleaning this data in Databricks?",
     "options": [
-      "Setting up a direct JDBC/ODBC connection between Databricks SQL and the visualization tool.",
-      "Implementing a custom API for each visualization tool to query data from Databricks SQL.",
-      "Using email to transfer data snapshots from Databricks SQL to the visualization tools.",
-      "Requiring a third-party data integration tool to mediate the connection between Databricks SQL and the visualization tools.",
-      "Manually exporting data from Databricks SQL to CSV files and importing them into the visualization tool."
-    ],
-    "answer": 0,
-    "category": "Data Integration",
-    "explanation": "A direct JDBC/ODBC connection is the standard method to connect Databricks SQL with visualization tools, enabling real-time data access for visualization."
-  },
-  {
-    "question": "As a data analyst, you are preparing to present your findings from a recent study. Which of the following steps aligns most closely with the initial phase of preparing your presentation in Databricks SQL?",
-    "options": [
-      "Drafting a preliminary report in a word processing software.",
-      "Designing an interactive frontend interface using HTML and CSS.",
-      "Developing a Python script to perform advanced statistical analysis.",
-      "Crafting a SQL query to gather and summarize the relevant data.",
-      "Scheduling meetings with stakeholders to discuss data interpretations."
-    ],
-    "answer": 3,
-    "category": "Data Presentation",
-    "explanation": "The initial phase involves crafting SQL queries to gather and summarize relevant data, which will serve as the basis for the presentation."
-  },
-  {
-    "question": "You are using Databricks to load data from a CSV file into a Delta table named SalesData. Which Databricks SQL COPY INTO command correctly imports this data?",
-    "options": [
-      "COPY INTO SalesData FROM CSV 'dbfs:/data/sales.csv' WITH HEADER;",
-      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' USING FORMAT AS CSV HEADER = TRUE;",
-      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' FORMAT = CSV FORMAT_OPTIONS ('header' = 'true');",
-      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' FILEFORMAT = 'CSV';",
-      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' USING (FILEFORMAT = CSV, HEADER = 'true');"
+      "Use DELETE FROM CustomerInteractions WHERE ... to remove duplicate rows based on a subquery that identifies the earliest interactions.",
+      "Utilize Delta Lake's time travel feature to revert CustomerInteractions to a state before duplicates were introduced.",
+      "Employ SELECT DISTINCT customer_id, interaction_date, ... FROM CustomerInteractions to create a distinct list of interactions.",
+      "Create a new table from CustomerInteractions using GROUP BY customer_id, interaction_date and aggregate functions to capture the latest interaction.",
+      "Implement a WINDOW function partitioned by customer_id and ordered by interaction_date to rank interactions and delete lower-ranked duplicates."
     ],
     "answer": 4,
-    "category": "Data Import",
-    "explanation": "The correct syntax for importing with a header row in Databricks SQL is to use FILEFORMAT and HEADER options in the COPY INTO command."
-  },
-  {
-    "question": "Regarding the accessibility and functionality of Databricks SQL dashboards, which statement best reflects their use in a business environment by various stakeholders?",
-    "options": [
-      "Only the original creator can view and run it.",
-      "Only data engineers and IT professionals can view and run it due to technical nature.",
-      "Dashboards are exclusively for top-level executives.",
-      "A variety of users, including analysts, managers, and stakeholders, can view and run for collaborative analysis.",
-      "Dashboards are publicly accessible with internet access, without any restrictions."
-    ],
-    "answer": 3,
-    "category": "Dashboard Accessibility",
-    "explanation": "Databricks SQL dashboards are designed for collaborative analysis, allowing a range of users to interact with the data, making it ideal for team-based environments."
-  },
-  {
-    "question": "A data analyst is creating a dashboard to present monthly sales data to company executives. After changes, the executives find the dashboard more informative. This scenario illustrates which of the following points about visualization formatting?",
-    "options": [
-      "Formatting is primarily used to reduce the size of the data set visually displayed.",
-      "Formatting changes the underlying data, thus altering the data's interpretation.",
-      "Over-formatting can lead to data misinterpretation by introducing visual biases.",
-      "Proper formatting can enhance readability and comprehension, leading to a more accurate interpretation of the data.",
-      "Formatting only affects the aesthetic aspect of the visualization and has no impact on its reception."
-    ],
-    "answer": 3,
-    "category": "Data Visualization",
-    "explanation": "Proper formatting improves readability and comprehension, enabling stakeholders to interpret the data more accurately."
+    "category": "Data Cleaning",
+    "explanation": "Using a WINDOW function with ranking provides an efficient way to identify and retain the latest interactions while removing duplicates."
   },
   {
     "question": "Which of the following statements best describes the function of Databricks SQL queries in the Databricks platform?",
@@ -104,19 +39,6 @@
     "explanation": "Databricks SQL provides an environment specifically for writing, testing, and running SQL code for data processing and analysis, making it ideal for analysts and data scientists."
   },
   {
-    "question": "Which of the following is a critical organization-specific consideration when handling PII data?",
-    "options": [
-      "Adapting PII data handling protocols to comply with regional and sector-specific privacy laws.",
-      "Developing a uniform public access policy for all PII data.",
-      "Implementing a one-size-fits-all approach to PII data storage and processing.",
-      "Prioritizing cost-saving measures over data security for PII data.",
-      "Always using the same encryption method for PII data across all departments."
-    ],
-    "answer": 0,
-    "category": "Data Privacy",
-    "explanation": "Complying with regional and sector-specific privacy laws is crucial to handle PII data appropriately, ensuring adherence to varying legal requirements."
-  },
-  {
     "question": "In Databricks, how does the persistence of data differ between a view and a temporary view?",
     "options": [
       "Both views and temporary views do not store data physically, but a view persists beyond the session.",
@@ -130,199 +52,30 @@
     "explanation": "Views persist beyond the session while temporary views exist only within the session without storing data physically."
   },
   {
-    "question": "In Databricks, setting up a refresh schedule for dashboards is essential for ensuring that the displayed data is current. How does one configure a refresh schedule for a Databricks SQL dashboard?",
+    "question": "In Azure Databricks, when using a table visualization type for SQL queries, which of the following statements accurately reflects its capabilities and limitations?",
     "options": [
-      "Sending periodic requests to the Databricks support team to refresh the dashboard.",
-      "Writing a custom script in the dashboard's SQL queries to automate refreshes.",
-      "Utilizing an external tool to trigger refreshes in the Databricks dashboard.",
-      "Manually updating the dashboard at regular intervals without any automated scheduling.",
-      "Click Schedule at the upper-right of the dashboard. Then, click Add schedule."
-    ],
-    "answer": 4,
-    "category": "Dashboard Configuration",
-    "explanation": "To set a refresh schedule, users can access the scheduling options within the dashboard interface, allowing automated updates."
-  },
-  {
-    "question": "Given a database with a table Orders, you want to retrieve the list of orders placed by a particular customer where the order amount is greater than $500. Which SQL query will correctly retrieve this data?",
-    "options": [
-      "DELETE FROM Orders WHERE CustomerId = 123 AND Amount > 500;",
-      "UPDATE Orders SET Amount = 500 WHERE CustomerId = 123;",
-      "SELECT OrderId FROM Orders WHERE CustomerId = 123 OR Amount > 500;",
-      "SELECT * FROM Orders WHERE CustomerId = 123 AND Amount > 500;",
-      "SELECT CustomerId, Amount FROM Orders WHERE OrderId = 123 AND Amount > 500;"
-    ],
-    "answer": 3,
-    "category": "SQL",
-    "explanation": "The query needs to select all fields where CustomerId is 123 and Amount is greater than 500, which is done with a SELECT * statement."
-  },
-  {
-    "question": "In a Databricks dashboard designed to track regional sales data, an analyst introduces a parameter to select a specific region. This is an example of which behavior in a Databricks dashboard?",
-    "options": [
-      "The parameter serves as an input field for users to add new data.",
-      "The parameter solely adjusts the layout without changing the data displayed.",
-      "The parameter automatically recalculates the entire dataset for the new region, affecting the data source.",
-      "The parameter behaves as a dynamic filter, altering the scope of the data presented based on user selection.",
-      "The parameter functions as a decorative element, enhancing the visual appeal but not the data content."
-    ],
-    "answer": 3,
-    "category": "Dashboard Parameters",
-    "explanation": "In this context, the parameter acts as a dynamic filter, enabling the dashboard to display data specific to the selected region, without affecting the underlying dataset."
-  },
-  {
-    "question": "When conducting a sophisticated analysis in data analytics, which activity best illustrates the thoughtful integration of varied datasets?",
-    "options": [
-      "Focusing exclusively on data from the system with the largest volume of data.",
-      "Deploying the latest machine learning algorithms without considering data sources.",
-      "Randomly alternating between systems for data retrieval to maintain diversity.",
-      "Separating datasets to preserve the uniqueness of each system's data.",
-      "Synchronizing and unifying data from diverse systems to ensure consistency in analytics."
-    ],
-    "answer": 4,
-    "category": "Data Integration",
-    "explanation": "Synchronizing and unifying data ensures consistency across analytics, which is essential for integrated data analysis."
-  },
-  {
-    "question": "How would you write a SQL query to list each product_id and its corresponding quantity for every order from a nested JSON array in Databricks?",
-    "options": [
-      "SELECT EXPLODE(order_info:items) AS (product_id, quantity) FROM customer_orders;",
-      "SELECT order_info:items[*].product_id, order_info:items[*].quantity FROM customer_orders UNNEST items;",
-      "SELECT FLATTEN(order_info:items.product_id, order_info:items.quantity) FROM customer_orders;",
-      "SELECT order_info:items.product_id, order_info:items.quantity FROM customer_orders;",
-      "SELECT order_info:items[*].product_id, order_info:items[*].quantity FROM customer_orders;"
-    ],
-    "answer": 0,
-    "category": "SQL JSON",
-    "explanation": "Using EXPLODE is the correct approach to handle nested JSON arrays and extract the product_id and quantity for each order in Databricks."
-  },
-  {
-    "question": "What is the primary purpose of Databricks SQL endpoints/warehouses in a data analytics environment?",
-    "options": [
-      "To offer a centralized platform for advanced machine learning model development and deployment.",
-      "To provide a secure environment for data encryption and compliance management.",
-      "To serve as the primary storage location for large-scale data sets, replacing traditional data warehouses.",
-      "To act as the primary interface for application development and deployment within the Databricks ecosystem.",
-      "To facilitate SQL-based data querying and analysis, offering a managed environment for running SQL queries on large datasets."
-    ],
-    "answer": 4,
-    "category": "Databricks SQL Warehouses",
-    "explanation": "Databricks SQL endpoints/warehouses are primarily designed to handle SQL queries and analysis on large datasets efficiently, providing a robust environment for analytics."
-  },
-  {
-    "question": "In the context of Delta Lake tables in Databricks, how is historical data maintained, and what command is used to access this history?",
-    "options": [
-      "Delta Lake tables do not maintain historical data.",
-      "Historical data is maintained through versioned table updates, accessed with the DESCRIBE HISTORY command.",
-      "Historical data is maintained in separate snapshot tables, accessed with the SHOW SNAPSHOT command.",
-      "Historical data is stored in a dedicated audit log, accessed with the VIEW AUDIT LOG command.",
-      "Historical data is maintained through periodic backups, accessed with the SHOW BACKUP command."
-    ],
-    "answer": 1,
-    "category": "Delta Lake",
-    "explanation": "Delta Lake maintains historical data through versioned table updates, accessible via the DESCRIBE HISTORY command, which provides a record of changes."
-  },
-  {
-    "question": "In a Databricks SQL environment, you are tasked with analyzing sales data. You need to find all products that had their first sale amounting to more than $500. Which SQL query using a subquery appropriately retrieves this information?",
-    "options": [
-      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleDate = (SELECT MIN(SaleDate) FROM SalesRecords GROUP BY ProductID);",
-      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleID IN (SELECT MIN(SaleID) FROM SalesRecords GROUP BY ProductID);",
-      "SELECT DISTINCT ProductID FROM SalesRecords WHERE SaleAmount > 500 GROUP BY ProductID HAVING SaleDate = MIN(SaleDate);",
-      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleDate = (SELECT MIN(SaleDate) FROM SalesRecords WHERE ProductID = SalesRecords.ProductID);",
-      "SELECT ProductID FROM (SELECT ProductID, MIN(SaleDate) AS FirstSaleDate FROM SalesRecords GROUP BY ProductID) AS FirstSales WHERE FirstSaleDate > 500;"
-    ],
-    "answer": 3,
-    "category": "SQL",
-    "explanation": "The correct answer uses a subquery to find the minimum sale date for each ProductID where SaleAmount is over 500, filtering correctly based on the specific product's earliest sale."
-  },
-  {
-    "question": "In the context of Databricks, how is Personally Identifiable Information (PII) typically handled to ensure data privacy and compliance?",
-    "options": [
-      "By creating a separate database for PII.",
-      "Through the use of Delta Lake features for fine-grained access control.",
-      "By automatically encrypting all data fields that contain PII.",
-      "PII is not specifically handled in Databricks; it relies on external tools.",
-      "By anonymizing PII data through built-in Databricks functions."
-    ],
-    "answer": 1,
-    "category": "Data Security",
-    "explanation": "Delta Lake's fine-grained access control enables secure handling of PII by restricting access at a detailed level within Databricks."
-  },
-  {
-    "question": "Which of the following best describes the key audience and side audiences for Databricks SQL?",
-    "options": [
-      "The key audience is data scientists, with both data engineers and software developers as side audiences.",
-      "The key audience includes both data analysts and data scientists, with no significant side audiences.",
-      "The primary audience consists of data analysts, with data scientists and data engineers forming the side audiences.",
-      "The key audience is exclusively data engineers, with software developers as a side audience.",
-      "The main audience comprises business intelligence professionals, with data analysts and data engineers as side audiences."
+      "Table visualizations primarily function to display graphical representations like charts and graphs, rather than tabular data.",
+      "Table visualizations in Databricks are primarily used for external data export and are not suitable for in-dashboard data presentation.",
+      "They allow for manual reordering, hiding, and formatting of data columns, but do not perform data aggregations within the result set.",
+      "They are limited to displaying only numerical data and cannot handle textual or categorical data.",
+      "Table visualizations in Databricks automatically aggregate data within the result set, providing a summary view."
     ],
     "answer": 2,
-    "category": "Audience",
-    "explanation": "Databricks SQL primarily targets data analysts, but data scientists and data engineers also use it as side audiences for data processing and insights."
+    "category": "Data Visualization",
+    "explanation": "Table visualizations in Databricks allow formatting and organizing data but do not perform aggregations within the visualization itself."
   },
   {
-    "question": "You are analyzing a dataset OrderDetails in a Databricks SQL environment, which includes OrderID, ProductID, Quantity, and UnitPrice. Your objective is to find the total revenue generated by each product. Which SQL query effectively aggregates this data to provide the desired output?",
+    "question": "Which of the following statements is true regarding MERGE INTO, INSERT INTO, and COPY INTO?",
     "options": [
-      "SELECT ProductID, SUM(Quantity) FROM OrderDetails GROUP BY ProductID;",
-      "SELECT ProductID, AVG(UnitPrice * Quantity) FROM OrderDetails GROUP BY ProductID;",
-      "SELECT ProductID, SUM(UnitPrice) FROM OrderDetails GROUP BY ProductID;",
-      "SELECT ProductID, SUM(UnitPrice * Quantity) AS TotalRevenue FROM OrderDetails GROUP BY ProductID;",
-      "SELECT OrderID, SUM(UnitPrice * Quantity) AS TotalRevenue FROM OrderDetails GROUP BY OrderID;"
-    ],
-    "answer": 3,
-    "category": "SQL Aggregation",
-    "explanation": "To calculate the total revenue, we multiply UnitPrice by Quantity for each row, then sum these values for each ProductID, as shown in the correct query."
-  },
-  {
-    "question": "In a Databricks SQL context, consider a dataset with columns 'Department', 'Employee', and 'Sales'. You are required to analyze the data using the ROLLUP and CUBE functions. Given this scenario, select the correct statement regarding the type of aggregations ROLLUP and CUBE would generate when applied to the 'Department' and 'Employee' columns.",
-    "options": [
-      "ROLLUP provides aggregations only for each combination of 'Department' and 'Employee', while CUBE gives a detailed breakdown including each 'Department', each 'Employee', and a grand total.",
-      "ROLLUP generates hierarchical aggregations starting from the leftmost column in the GROUP BY clause. It would produce subtotals for each 'Department', subtotals for each combination of 'Department' and 'Employee', and a grand total.",
-      "CUBE creates aggregations for all possible combinations of the columns in the GROUP BY clause. It would generate subtotals for each 'Department', each 'Employee', each combination of 'Department' and 'Employee', and a grand total.",
-      "Neither ROLLUP nor CUBE will generate subtotals for individual 'Departments' or 'Employees'; they only provide a grand total.",
-      "Both ROLLUP and CUBE produce identical aggregations, including subtotals for each 'Department', each 'Employee', each combination of 'Department' and 'Employee', and a grand total."
+      "COPY INTO is used for updating existing records and inserting new records, MERGE INTO is only for inserting new records, and INSERT INTO is not used in Databricks.",
+      "MERGE INTO is suitable for updating existing records and inserting new records, while INSERT INTO is used only for adding new records, and COPY INTO is used for loading data from files.",
+      "INSERT INTO can be used for both updating existing records and inserting new records, while MERGE INTO is only for inserting new records, and COPY INTO is not used in Databricks.",
+      "MERGE INTO and INSERT INTO perform the same functions, and COPY INTO is not a recognized command in Databricks.",
+      "INSERT INTO and COPY INTO are both used for inserting new records, but COPY INTO is specifically for loading data from external sources, and MERGE INTO is for updating existing records only."
     ],
     "answer": 1,
-    "category": "SQL Aggregation",
-    "explanation": "ROLLUP generates hierarchical subtotals, providing aggregated values at multiple levels, making it suitable for creating comprehensive summaries by department and employee."
-  },
-  {
-    "question": "When sharing Databricks SQL dashboards, there are two primary settings: 'Run as viewer' and 'Run as owner'. What are the pros and cons of each setting in the context of sharing dashboards?",
-    "options": [
-      "'Run as viewer' allows full customization of queries for each viewer (pro), but can be more resource-intensive (con). 'Run as owner' simplifies query management (pro), but doesn't account for individual user access levels (con).",
-      "'Run as viewer' and 'Run as owner' both provide the same level of data visibility (pro), but may have limitations in customizing query execution (con).",
-      "'Run as owner' offers greater customization of dashboard settings (pro), but requires viewers to have advanced knowledge of SQL (con). 'Run as viewer' simplifies the user experience (pro), but may lead to inconsistent data reporting (con).",
-      "'Run as viewer' enhances data security by adhering to individual viewer's permissions (pro), but may limit data visibility (con). 'Run as owner' ensures consistent data visibility across users (pro), but might pose security risks if the owner has broader data access (con).",
-      "Both settings allow for easy sharing of dashboards (pro), but can lead to complexities in managing user permissions and data access (con)."
-    ],
-    "answer": 3,
-    "category": "Dashboard Sharing",
-    "explanation": "'Run as viewer' allows viewers to access data based on their permissions, enhancing security, while 'Run as owner' ensures data consistency but may pose security risks."
-  },
-  {
-    "question": "In the context of Databricks SQL, which of the following statements accurately describes both a caution and a benefit of working with streaming data?",
-    "options": [
-      "Benefit: Streaming data allows for real-time analytics and decision-making. Caution: There is a higher risk of data inconsistency due to the continuous flow of data.",
-      "Benefit: Streaming data simplifies data transformation. Caution: It can lead to increased costs due to the need for more computing resources.",
-      "Benefit: Streaming data can handle large volumes of data efficiently. Caution: Real-time data processing may lead to higher error rates if not managed correctly.",
-      "Benefit: Streaming data reduces the need for storage. Caution: It requires more complex SQL queries.",
-      "Benefit: Streaming data ensures complete data privacy. Caution: It can lead to delayed data processing."
-    ],
-    "answer": 0,
-    "category": "Streaming Data",
-    "explanation": "Streaming data enables real-time analytics, but it poses risks of inconsistency as data flows continuously, which must be managed carefully."
-  },
-  {
-    "question": "When importing data from an Amazon S3 bucket into a Databricks environment using Databricks SQL, which SQL command is typically used to perform this operation?",
-    "options": [
-      "CREATE TABLE my_table USING CSV LOCATION 's3://mybucket/mydata.csv';",
-      "INSERT INTO my_table SELECT * FROM s3a://mybucket/mydata.csv;",
-      "SELECT * INTO my_table FROM OPENROWSET(BULK 's3://mybucket/mydata.csv', SINGLE_CLOB) AS mydata;",
-      "COPY INTO my_table FROM 's3://mybucket/mydata.csv' FILEFORMAT = CSV;",
-      "LOAD DATA INPATH 's3://mybucket/mydata.csv' INTO TABLE my_table;"
-    ],
-    "answer": 0,
-    "category": "Data Import",
-    "explanation": "The correct command uses CREATE TABLE with the USING clause to specify the S3 location for the CSV file, enabling data import directly from S3."
+    "category": "SQL",
+    "explanation": "MERGE INTO is typically used for upserts, handling both inserts and updates, while INSERT INTO is used for inserting new records, and COPY INTO is often used to load data from external sources."
   },
   {
     "question": "What are the essential steps to execute a basic SQL query in Databricks?",
@@ -338,6 +91,19 @@
     "explanation": "The essential steps in Databricks for executing a SQL query involve writing it in a notebook, validating syntax, executing, and then viewing results."
   },
   {
+    "question": "When conducting a sophisticated analysis in data analytics, which activity best illustrates the thoughtful integration of varied datasets?",
+    "options": [
+      "Focusing exclusively on data from the system with the largest volume of data.",
+      "Deploying the latest machine learning algorithms without considering data sources.",
+      "Randomly alternating between systems for data retrieval to maintain diversity.",
+      "Separating datasets to preserve the uniqueness of each system's data.",
+      "Synchronizing and unifying data from diverse systems to ensure consistency in analytics."
+    ],
+    "answer": 4,
+    "category": "Data Integration",
+    "explanation": "Synchronizing and unifying data ensures consistency across analytics, which is essential for integrated data analysis."
+  },
+  {
     "question": "Given two tables, Customers and Orders, the resulting joined table has NULLs for customers without orders. What type of JOIN was used?",
     "options": [
       "LEFT JOIN",
@@ -351,17 +117,17 @@
     "explanation": "A LEFT JOIN includes all records from the left table (Customers) and matches them with the right table (Orders), filling in NULLs where there are no matches."
   },
   {
-    "question": "How is data enhancement commonly applied in analytics?",
+    "question": "When integrating Databricks SQL with popular visualization tools such as Tableau, Power BI, and Looker, which of the following steps is commonly involved in the connection process?",
     "options": [
-      "By converting unstructured data into structured format for easier database storage.",
-      "Through cleaning and normalizing data to maintain consistency in databases.",
-      "By anonymizing sensitive information in datasets for privacy compliance.",
-      "By reducing the size of the dataset to improve processing speed.",
-      "By incorporating external data sources to enrich existing datasets for deeper insights."
+      "Setting up a direct JDBC/ODBC connection between Databricks SQL and the visualization tool.",
+      "Implementing a custom API for each visualization tool to query data from Databricks SQL.",
+      "Using email to transfer data snapshots from Databricks SQL to the visualization tools.",
+      "Requiring a third-party data integration tool to mediate the connection between Databricks SQL and the visualization tools.",
+      "Manually exporting data from Databricks SQL to CSV files and importing them into the visualization tool."
     ],
-    "answer": 4,
-    "category": "Data Enhancement",
-    "explanation": "Data enhancement often involves incorporating external data to provide deeper insights, enriching the original dataset with additional information."
+    "answer": 0,
+    "category": "Data Integration",
+    "explanation": "A direct JDBC/ODBC connection is the standard method to connect Databricks SQL with visualization tools, enabling real-time data access for visualization."
   },
   {
     "question": "In Databricks, a data analyst is working on a dashboard and wants to ensure a consistent color scheme across all visualizations. Which approach should the analyst take?",
@@ -377,6 +143,45 @@
     "explanation": "A dashboard-wide setting is the most efficient way to ensure a uniform color scheme without needing to adjust each visualization manually."
   },
   {
+    "question": "Which of the following best describes the key audience and side audiences for Databricks SQL?",
+    "options": [
+      "The key audience is data scientists, with both data engineers and software developers as side audiences.",
+      "The key audience includes both data analysts and data scientists, with no significant side audiences.",
+      "The primary audience consists of data analysts, with data scientists and data engineers forming the side audiences.",
+      "The key audience is exclusively data engineers, with software developers as a side audience.",
+      "The main audience comprises business intelligence professionals, with data analysts and data engineers as side audiences."
+    ],
+    "answer": 2,
+    "category": "Audience",
+    "explanation": "Databricks SQL primarily targets data analysts, but data scientists and data engineers also use it as side audiences for data processing and insights."
+  },
+  {
+    "question": "In a Databricks dashboard designed to track regional sales data, an analyst introduces a parameter to select a specific region. This is an example of which behavior in a Databricks dashboard?",
+    "options": [
+      "The parameter serves as an input field for users to add new data.",
+      "The parameter solely adjusts the layout without changing the data displayed.",
+      "The parameter automatically recalculates the entire dataset for the new region, affecting the data source.",
+      "The parameter behaves as a dynamic filter, altering the scope of the data presented based on user selection.",
+      "The parameter functions as a decorative element, enhancing the visual appeal but not the data content."
+    ],
+    "answer": 3,
+    "category": "Dashboard Parameters",
+    "explanation": "In this context, the parameter acts as a dynamic filter, enabling the dashboard to display data specific to the selected region, without affecting the underlying dataset."
+  },
+  {
+    "question": "How would you write a SQL query to list each product_id and its corresponding quantity for every order from a nested JSON array in Databricks?",
+    "options": [
+      "SELECT EXPLODE(order_info:items) AS (product_id, quantity) FROM customer_orders;",
+      "SELECT order_info:items[*].product_id, order_info:items[*].quantity FROM customer_orders UNNEST items;",
+      "SELECT FLATTEN(order_info:items.product_id, order_info:items.quantity) FROM customer_orders;",
+      "SELECT order_info:items.product_id, order_info:items.quantity FROM customer_orders;",
+      "SELECT order_info:items[*].product_id, order_info:items[*].quantity FROM customer_orders;"
+    ],
+    "answer": 0,
+    "category": "SQL JSON",
+    "explanation": "Using EXPLODE is the correct approach to handle nested JSON arrays and extract the product_id and quantity for each order in Databricks."
+  },
+  {
     "question": "In a Databricks environment, you are optimizing the performance of a data processing task that involves complex operations on arrays within a Spark SQL dataset. Which of the following higher-order functions in Spark SQL would be most suitable for efficiently transforming elements within an array column scores?",
     "options": [
       "SELECT ARRAY_CONTAINS(scores, 10) FROM dataset;",
@@ -388,5 +193,380 @@
     "answer": 4,
     "category": "Spark SQL",
     "explanation": "The TRANSFORM function allows transformation of each element within the array, which is ideal for modifying array data as required in this context."
+  },
+  {
+    "question": "In the context of Databricks SQL, which of the following statements accurately describes both a caution and a benefit of working with streaming data?",
+    "options": [
+      "Benefit: Streaming data allows for real-time analytics and decision-making. Caution: There is a higher risk of data inconsistency due to the continuous flow of data.",
+      "Benefit: Streaming data simplifies data transformation. Caution: It can lead to increased costs due to the need for more computing resources.",
+      "Benefit: Streaming data can handle large volumes of data efficiently. Caution: Real-time data processing may lead to higher error rates if not managed correctly.",
+      "Benefit: Streaming data reduces the need for storage. Caution: It requires more complex SQL queries.",
+      "Benefit: Streaming data ensures complete data privacy. Caution: It can lead to delayed data processing."
+    ],
+    "answer": 0,
+    "category": "Streaming Data",
+    "explanation": "Streaming data enables real-time analytics, but it poses risks of inconsistency as data flows continuously, which must be managed carefully."
+  },
+  {
+    "question": "A data analyst is creating a dashboard to present monthly sales data to company executives. After changes, the executives find the dashboard more informative. This scenario illustrates which of the following points about visualization formatting?",
+    "options": [
+      "Formatting is primarily used to reduce the size of the data set visually displayed.",
+      "Formatting changes the underlying data, thus altering the data's interpretation.",
+      "Over-formatting can lead to data misinterpretation by introducing visual biases.",
+      "Proper formatting can enhance readability and comprehension, leading to a more accurate interpretation of the data.",
+      "Formatting only affects the aesthetic aspect of the visualization and has no impact on its reception."
+    ],
+    "answer": 3,
+    "category": "Data Visualization",
+    "explanation": "Proper formatting improves readability and comprehension, enabling stakeholders to interpret the data more accurately."
+  },
+  {
+    "question": "In Databricks SQL, when creating a basic, schema-specific visualization, what is the first step you should take?",
+    "options": [
+      "Configure the dashboard settings to match the schema requirements.",
+      "Write a SQL query to retrieve data from the specific schema.",
+      "Adjust the data refresh rate to ensure real-time visualization.",
+      "Import external visualization libraries for advanced charting.",
+      "Select the visualization type from the visualization menu."
+    ],
+    "answer": 1,
+    "category": "Data Visualization",
+    "explanation": "Retrieving data with a SQL query from the specific schema is the first step in ensuring the visualization is based on accurate data."
+  },
+  {
+    "question": "When importing data from an Amazon S3 bucket into a Databricks environment using Databricks SQL, which SQL command is typically used to perform this operation?",
+    "options": [
+      "CREATE TABLE my_table USING CSV LOCATION 's3://mybucket/mydata.csv';",
+      "INSERT INTO my_table SELECT * FROM s3a://mybucket/mydata.csv;",
+      "SELECT * INTO my_table FROM OPENROWSET(BULK 's3://mybucket/mydata.csv', SINGLE_CLOB) AS mydata;",
+      "COPY INTO my_table FROM 's3://mybucket/mydata.csv' FILEFORMAT = CSV;",
+      "LOAD DATA INPATH 's3://mybucket/mydata.csv' INTO TABLE my_table;"
+    ],
+    "answer": 0,
+    "category": "Data Import",
+    "explanation": "The correct command uses CREATE TABLE with the USING clause to specify the S3 location for the CSV file, enabling data import directly from S3."
+  },
+  {
+    "question": "As a data analyst, you are preparing to present your findings from a recent study. Which of the following steps aligns most closely with the initial phase of preparing your presentation in Databricks SQL?",
+    "options": [
+      "Drafting a preliminary report in a word processing software.",
+      "Designing an interactive frontend interface using HTML and CSS.",
+      "Developing a Python script to perform advanced statistical analysis.",
+      "Crafting a SQL query to gather and summarize the relevant data.",
+      "Scheduling meetings with stakeholders to discuss data interpretations."
+    ],
+    "answer": 3,
+    "category": "Data Presentation",
+    "explanation": "The initial phase involves crafting SQL queries to gather and summarize relevant data, which will serve as the basis for the presentation."
+  },
+  {
+    "question": "What are the primary benefits of implementing Delta Lake within the Databricks Lakehouse architecture?",
+    "options": [
+      "Delta Lake primarily enhances data security and compliance features.",
+      "Delta Lake is beneficial only for handling unstructured data types.",
+      "Delta Lake provides ACID transactions, scalable metadata handling, and time-travel features.",
+      "It mainly improves the graphical user interface for data exploration.",
+      "It offers high-speed streaming data ingestion and real-time analytics capabilities."
+    ],
+    "answer": 2,
+    "category": "Delta Lake",
+    "explanation": "Delta Lake's primary benefits include support for ACID transactions, metadata scalability, and time-travel features, enhancing data reliability and manageability."
+  },
+  {
+    "question": "Which of the following statements accurately distinguishes between discrete and continuous statistics in the context of data analysis?",
+    "options": [
+      "Continuous data can only take on integer values, whereas discrete data can take on any value, including decimals.",
+      "Discrete data is used for time series analysis, while continuous data is not suitable for this purpose.",
+      "Continuous data is always non-numeric, whereas discrete data is numeric.",
+      "Both discrete and continuous data are types of categorical data used in qualitative analysis.",
+      "Discrete data can only take on a finite number of values, while continuous data can take on any value within a given range."
+    ],
+    "answer": 4,
+    "category": "Statistics",
+    "explanation": "Discrete data takes on specific, countable values, while continuous data can take on any value within a range, suitable for measurements."
+  },
+  {
+    "question": "What is the correct method to rename a table in Databricks?",
+    "options": [
+      "Use the ALTER TABLE RENAME TO command.",
+      "Update the table name through the Databricks UI.",
+      "Delete the old table and create a new one with the desired name.",
+      "Modify the table name in the metadata file.",
+      "Use the RENAME TABLE command."
+    ],
+    "answer": 0,
+    "category": "SQL",
+    "explanation": "The correct way to rename a table in Databricks is using the ALTER TABLE RENAME TO command, which changes the table's name directly."
+  },
+  {
+    "question": "How can you determine if a table in Databricks is managed or unmanaged?",
+    "options": [
+      "By the size of the table data.",
+      "By the location of the data files specified in the table definition.",
+      "By the type of data stored in the table.",
+      "By the speed of query execution on the table.",
+      "By the number of columns in the table."
+    ],
+    "answer": 1,
+    "category": "Delta Lake",
+    "explanation": "In Databricks, the location of data files helps determine if a table is managed (stored in Databricks-managed storage) or unmanaged (external storage)."
+  },
+  {
+    "question": "In a Databricks SQL context, consider a dataset with columns 'Department', 'Employee', and 'Sales'. You are required to analyze the data using the ROLLUP and CUBE functions. Given this scenario, select the correct statement regarding the type of aggregations ROLLUP and CUBE would generate when applied to the 'Department' and 'Employee' columns.",
+    "options": [
+      "ROLLUP provides aggregations only for each combination of 'Department' and 'Employee', while CUBE gives a detailed breakdown including each 'Department', each 'Employee', and a grand total.",
+      "ROLLUP generates hierarchical aggregations starting from the leftmost column in the GROUP BY clause. It would produce subtotals for each 'Department', subtotals for each combination of 'Department' and 'Employee', and a grand total.",
+      "CUBE creates aggregations for all possible combinations of the columns in the GROUP BY clause. It would generate subtotals for each 'Department', each 'Employee', each combination of 'Department' and 'Employee', and a grand total.",
+      "Neither ROLLUP nor CUBE will generate subtotals for individual 'Departments' or 'Employees'; they only provide a grand total.",
+      "Both ROLLUP and CUBE produce identical aggregations, including subtotals for each 'Department', each 'Employee', each combination of 'Department' and 'Employee', and a grand total."
+    ],
+    "answer": 1,
+    "category": "SQL Aggregation",
+    "explanation": "ROLLUP generates hierarchical subtotals, providing aggregated values at multiple levels, making it suitable for creating comprehensive summaries by department and employee."
+  },
+  {
+    "question": "In Databricks SQL, what is the primary purpose of using the ANALYZE TABLE command?",
+    "options": [
+      "To synchronize the table data with an external data source.",
+      "To change the data storage format of the table.",
+      "To modify the structure of a table by adding or removing columns.",
+      "To collect statistics about the table for optimizing query performance.",
+      "To back up the table data to a specified location."
+    ],
+    "answer": 3,
+    "category": "SQL Optimization",
+    "explanation": "ANALYZE TABLE collects table statistics, which are essential for the query optimizer to improve performance."
+  },
+  {
+    "question": "What is the primary purpose of Databricks SQL endpoints/warehouses in a data analytics environment?",
+    "options": [
+      "To offer a centralized platform for advanced machine learning model development and deployment.",
+      "To provide a secure environment for data encryption and compliance management.",
+      "To serve as the primary storage location for large-scale data sets, replacing traditional data warehouses.",
+      "To act as the primary interface for application development and deployment within the Databricks ecosystem.",
+      "To facilitate SQL-based data querying and analysis, offering a managed environment for running SQL queries on large datasets."
+    ],
+    "answer": 4,
+    "category": "Databricks SQL Warehouses",
+    "explanation": "Databricks SQL endpoints/warehouses are primarily designed to handle SQL queries and analysis on large datasets efficiently, providing a robust environment for analytics."
+  },
+  {
+    "question": "Consider the following SalesData table, and an SQL query is executed to generate a specific output. Which query most likely used to generate this output?",
+    "options": [
+      "SELECT Region, Product, SUM(SalesAmount) AS TotalSales FROM SalesData GROUP BY Region, Product, ROLLUP(Region, Product);",
+      "SELECT Region, Product, SUM(SalesAmount) AS TotalSales FROM SalesData GROUP BY CUBE(Region, Product);",
+      "SELECT Region, Product, SUM(SalesAmount) AS TotalSales FROM SalesData GROUP BY Region, Product;",
+      "SELECT Region, Product, COUNT(*) AS TotalSales FROM SalesData GROUP BY Region, Product, CUBE(Region, Product);"
+    ],
+    "answer": 1,
+    "category": "SQL Aggregation",
+    "explanation": "Using GROUP BY CUBE generates all combinations of the grouped columns with subtotals and a grand total, matching the example output."
+  },
+  {
+    "question": "Which of the following is a critical organization-specific consideration when handling PII data?",
+    "options": [
+      "Adapting PII data handling protocols to comply with regional and sector-specific privacy laws.",
+      "Developing a uniform public access policy for all PII data.",
+      "Implementing a one-size-fits-all approach to PII data storage and processing.",
+      "Prioritizing cost-saving measures over data security for PII data.",
+      "Always using the same encryption method for PII data across all departments."
+    ],
+    "answer": 0,
+    "category": "Data Privacy",
+    "explanation": "Complying with regional and sector-specific privacy laws is crucial to handle PII data appropriately, ensuring adherence to varying legal requirements."
+  },
+  {
+    "question": "In the context of Delta Lake tables in Databricks, how is historical data maintained, and what command is used to access this history?",
+    "options": [
+      "Delta Lake tables do not maintain historical data.",
+      "Historical data is maintained through versioned table updates, accessed with the DESCRIBE HISTORY command.",
+      "Historical data is maintained in separate snapshot tables, accessed with the SHOW SNAPSHOT command.",
+      "Historical data is stored in a dedicated audit log, accessed with the VIEW AUDIT LOG command.",
+      "Historical data is maintained through periodic backups, accessed with the SHOW BACKUP command."
+    ],
+    "answer": 1,
+    "category": "Delta Lake",
+    "explanation": "Delta Lake maintains historical data through versioned table updates, accessible via the DESCRIBE HISTORY command, which provides a record of changes."
+  },
+  {
+    "question": "Given a database with a table Orders, you want to retrieve the list of orders placed by a particular customer where the order amount is greater than $500. Which SQL query will correctly retrieve this data?",
+    "options": [
+      "DELETE FROM Orders WHERE CustomerId = 123 AND Amount > 500;",
+      "UPDATE Orders SET Amount = 500 WHERE CustomerId = 123;",
+      "SELECT OrderId FROM Orders WHERE CustomerId = 123 OR Amount > 500;",
+      "SELECT * FROM Orders WHERE CustomerId = 123 AND Amount > 500;",
+      "SELECT CustomerId, Amount FROM Orders WHERE OrderId = 123 AND Amount > 500;"
+    ],
+    "answer": 3,
+    "category": "SQL",
+    "explanation": "The query needs to select all fields where CustomerId is 123 and Amount is greater than 500, which is done with a SELECT * statement."
+  },
+  {
+    "question": "When sharing Databricks SQL dashboards, there are two primary settings: 'Run as viewer' and 'Run as owner'. What are the pros and cons of each setting in the context of sharing dashboards?",
+    "options": [
+      "'Run as viewer' allows full customization of queries for each viewer (pro), but can be more resource-intensive (con). 'Run as owner' simplifies query management (pro), but doesn't account for individual user access levels (con).",
+      "'Run as viewer' and 'Run as owner' both provide the same level of data visibility (pro), but may have limitations in customizing query execution (con).",
+      "'Run as owner' offers greater customization of dashboard settings (pro), but requires viewers to have advanced knowledge of SQL (con). 'Run as viewer' simplifies the user experience (pro), but may lead to inconsistent data reporting (con).",
+      "'Run as viewer' enhances data security by adhering to individual viewer's permissions (pro), but may limit data visibility (con). 'Run as owner' ensures consistent data visibility across users (pro), but might pose security risks if the owner has broader data access (con).",
+      "Both settings allow for easy sharing of dashboards (pro), but can lead to complexities in managing user permissions and data access (con)."
+    ],
+    "answer": 3,
+    "category": "Dashboard Sharing",
+    "explanation": "'Run as viewer' allows viewers to access data based on their permissions, enhancing security, while 'Run as owner' ensures data consistency but may pose security risks."
+  },
+  {
+    "question": "In the context of statistics, what are key moments of a statistical distribution?",
+    "options": [
+      "The mean, variance, skewness, and kurtosis, which are the first four moments of a distribution.",
+      "The mean, median, and mode, which define the central tendency of the distribution.",
+      "The skewness and kurtosis, which describe the shape and tail behavior of the distribution.",
+      "The range, interquartile range, and standard deviation, which describe the variability of the distribution.",
+      "The maximum and minimum values, which set the boundaries of the distribution."
+    ],
+    "answer": 0,
+    "category": "Statistics",
+    "explanation": "The first four moments of a distribution are mean, variance, skewness, and kurtosis, describing central tendency, variability, asymmetry, and peakedness."
+  },
+  {
+    "question": "What are the primary responsibilities of a table owner in Databricks?",
+    "options": [
+      "Designing the visual representation of the table data.",
+      "Regularly updating the table data to keep it current.",
+      "Ensuring the table is always available for querying and analysis.",
+      "Optimizing the table for faster query performance.",
+      "Managing user access and permissions for the table."
+    ],
+    "answer": 4,
+    "category": "Data Management",
+    "explanation": "Table owners in Databricks are responsible for managing user access and permissions, ensuring proper security and accessibility of the table."
+  },
+  {
+    "question": "You are using Databricks to load data from a CSV file into a Delta table named SalesData. Which Databricks SQL COPY INTO command correctly imports this data?",
+    "options": [
+      "COPY INTO SalesData FROM CSV 'dbfs:/data/sales.csv' WITH HEADER;",
+      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' USING FORMAT AS CSV HEADER = TRUE;",
+      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' FORMAT = CSV FORMAT_OPTIONS ('header' = 'true');",
+      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' FILEFORMAT = 'CSV';",
+      "COPY INTO SalesData FROM 'dbfs:/data/sales.csv' USING (FILEFORMAT = CSV, HEADER = 'true');"
+    ],
+    "answer": 4,
+    "category": "Data Import",
+    "explanation": "The correct syntax for importing with a header row in Databricks SQL is to use FILEFORMAT and HEADER options in the COPY INTO command."
+  },
+  {
+    "question": "A data analyst is using Databricks SQL to visualize data showing the monthly sales trends across different regions. Based on the data and the goal of showing trends over time, which visualization type should the analyst select in Databricks SQL?",
+    "options": [
+      "Heatmap, for representing the intensity of sales in different regions.",
+      "Bar chart, as it is best for comparing categories of data at a single point in time.",
+      "Pie chart, to show the proportion of sales in each region compared to the whole.",
+      "Line chart, as it effectively displays trends and changes over time.",
+      "Scatter plot, to show the relationship between sales volume and time."
+    ],
+    "answer": 3,
+    "category": "Data Visualization",
+    "explanation": "A line chart is ideal for visualizing trends over time, as it highlights changes and patterns across time intervals."
+  },
+  {
+    "question": "In the context of Databricks, how is Personally Identifiable Information (PII) typically handled to ensure data privacy and compliance?",
+    "options": [
+      "By creating a separate database for PII.",
+      "Through the use of Delta Lake features for fine-grained access control.",
+      "By automatically encrypting all data fields that contain PII.",
+      "PII is not specifically handled in Databricks; it relies on external tools.",
+      "By anonymizing PII data through built-in Databricks functions."
+    ],
+    "answer": 1,
+    "category": "Data Security",
+    "explanation": "Delta Lake's fine-grained access control enables secure handling of PII by restricting access at a detailed level within Databricks."
+  },
+  {
+    "question": "You are analyzing a dataset OrderDetails in a Databricks SQL environment, which includes OrderID, ProductID, Quantity, and UnitPrice. Your objective is to find the total revenue generated by each product. Which SQL query effectively aggregates this data to provide the desired output?",
+    "options": [
+      "SELECT ProductID, SUM(Quantity) FROM OrderDetails GROUP BY ProductID;",
+      "SELECT ProductID, AVG(UnitPrice * Quantity) FROM OrderDetails GROUP BY ProductID;",
+      "SELECT ProductID, SUM(UnitPrice) FROM OrderDetails GROUP BY ProductID;",
+      "SELECT ProductID, SUM(UnitPrice * Quantity) AS TotalRevenue FROM OrderDetails GROUP BY ProductID;",
+      "SELECT OrderID, SUM(UnitPrice * Quantity) AS TotalRevenue FROM OrderDetails GROUP BY OrderID;"
+    ],
+    "answer": 3,
+    "category": "SQL Aggregation",
+    "explanation": "To calculate the total revenue, we multiply UnitPrice by Quantity for each row, then sum these values for each ProductID, as shown in the correct query."
+  },
+  {
+    "question": "Regarding the accessibility and functionality of Databricks SQL dashboards, which statement best reflects their use in a business environment by various stakeholders?",
+    "options": [
+      "Only the original creator can view and run it.",
+      "Only data engineers and IT professionals can view and run it due to technical nature.",
+      "Dashboards are exclusively for top-level executives.",
+      "A variety of users, including analysts, managers, and stakeholders, can view and run for collaborative analysis.",
+      "Dashboards are publicly accessible with internet access, without any restrictions."
+    ],
+    "answer": 3,
+    "category": "Dashboard Accessibility",
+    "explanation": "Databricks SQL dashboards are designed for collaborative analysis, allowing a range of users to interact with the data, making it ideal for team-based environments."
+  },
+  {
+    "question": "How is data enhancement commonly applied in analytics?",
+    "options": [
+      "By converting unstructured data into structured format for easier database storage.",
+      "Through cleaning and normalizing data to maintain consistency in databases.",
+      "By anonymizing sensitive information in datasets for privacy compliance.",
+      "By reducing the size of the dataset to improve processing speed.",
+      "By incorporating external data sources to enrich existing datasets for deeper insights."
+    ],
+    "answer": 4,
+    "category": "Data Enhancement",
+    "explanation": "Data enhancement often involves incorporating external data to provide deeper insights, enriching the original dataset with additional information."
+  },
+  {
+    "question": "Which of the queries below could have been used to generate the output?",
+    "options": [
+      "SELECT Name, Department FROM Employee WHERE Salary OVER 50000;",
+      "SELECT Name, Department FROM Employee WHERE Salary >= 50000;",
+      "SELECT Department, Name FROM Employee WHERE Salary > 50000;",
+      "SELECT * FROM Employee WHERE Salary > 50000;",
+      "SELECT Name, Department FROM Employee WHERE Salary >= 50000;"
+    ],
+    "answer": 1,
+    "category": "SQL",
+    "explanation": "The correct query is 'SELECT Name, Department FROM Employee WHERE Salary >= 50000;', as it selects only the Name and Department columns for employees with a salary above 50,000."
+  },
+  {
+    "question": "In Databricks, setting up a refresh schedule for dashboards is essential for ensuring that the displayed data is current. How does one configure a refresh schedule for a Databricks SQL dashboard?",
+    "options": [
+      "Sending periodic requests to the Databricks support team to refresh the dashboard.",
+      "Writing a custom script in the dashboard's SQL queries to automate refreshes.",
+      "Utilizing an external tool to trigger refreshes in the Databricks dashboard.",
+      "Manually updating the dashboard at regular intervals without any automated scheduling.",
+      "Click Schedule at the upper-right of the dashboard. Then, click Add schedule."
+    ],
+    "answer": 4,
+    "category": "Dashboard Configuration",
+    "explanation": "To set a refresh schedule, users can access the scheduling options within the dashboard interface, allowing automated updates."
+  },
+  {
+    "question": "Which query most likely used to generate this output?",
+    "options": [
+      "SELECT Region, Product, SUM(SalesAmount) AS TotalSales FROM SalesData GROUP BY ROLLUP (Region, Product);",
+      "SELECT Region, Product, SUM(SalesAmount) AS TotalSales FROM SalesData GROUP BY CUBE (Region, Product);",
+      "SELECT Region, Product, SUM(SalesAmount) AS TotalSales FROM SalesData GROUP BY ROLLUP (Product, Region);",
+      "SELECT Region, Product, COUNT(*) AS TotalSales FROM SalesData GROUP BY Region, Product WITH ROLLUP;"
+    ],
+    "answer": 1,
+    "category": "SQL",
+    "explanation": "The 'CUBE' function generates a result that includes all possible combinations of aggregations for the specified columns, including NULL values for grand totals. This matches the provided output."
+  },
+  {
+    "question": "In a Databricks SQL environment, you are tasked with analyzing sales data. You need to find all products that had their first sale amounting to more than $500. Which SQL query using a subquery appropriately retrieves this information?",
+    "options": [
+      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleDate = (SELECT MIN(SaleDate) FROM SalesRecords GROUP BY ProductID);",
+      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleID IN (SELECT MIN(SaleID) FROM SalesRecords GROUP BY ProductID);",
+      "SELECT DISTINCT ProductID FROM SalesRecords WHERE SaleAmount > 500 GROUP BY ProductID HAVING SaleDate = MIN(SaleDate);",
+      "SELECT ProductID FROM SalesRecords WHERE SaleAmount > 500 AND SaleDate = (SELECT MIN(SaleDate) FROM SalesRecords WHERE ProductID = SalesRecords.ProductID);",
+      "SELECT ProductID FROM (SELECT ProductID, MIN(SaleDate) AS FirstSaleDate FROM SalesRecords GROUP BY ProductID) AS FirstSales WHERE FirstSaleDate > 500;"
+    ],
+    "answer": 3,
+    "category": "SQL",
+    "explanation": "The correct answer uses a subquery to find the minimum sale date for each ProductID where SaleAmount is over 500, filtering correctly based on the specific product's earliest sale."
   }
 ]

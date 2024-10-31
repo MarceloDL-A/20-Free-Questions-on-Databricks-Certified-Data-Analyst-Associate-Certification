@@ -213,7 +213,6 @@
         <p id="total-questions-display">Número total de questões: <strong id="total-questions-count">0</strong></p>
 
         <div id="upload-section">
-       
             <h2>Alterar Tema do Quiz</h2>
             <p class="instructions">Selecione ou insira um novo tema abaixo. O quiz carregará questões de um arquivo JSON nomeado no formato <strong>questions_[tema].json</strong>. Por exemplo, se o tema for 'Google', o arquivo deve ser nomeado <strong>questions_Google.json</strong>.</p>
             
@@ -1041,15 +1040,18 @@ async function populateThemes() {
 
 
 
+
     // --------------- Inicialização ---------------
     
-    // Carregar progresso ao carregar a página
     window.onload = function () {
         loadCalendarProgress();  // Carrega o progresso salvo ao iniciar
         loadQuestionsFromFile(currentTheme);
         updatePrompt(currentTheme);
         generateStudyCalendar();  // Gera o calendário ao carregar a página
+        populateThemes();  // Popula a lista de temas ao carregar a página
     };
+    
+    
     
 </script>
 
