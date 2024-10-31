@@ -1,0 +1,421 @@
+[
+  {
+    "question": "A data analyst is publishing a dashboard in Databricks and is deciding whether to embed their credentials or not. If the analyst chooses to embed their credentials, which of the following is a consequence?",
+    "options": [
+      "Users will need to have direct access to the workspace, underlying data, and SQL warehouse to view the dashboard.",
+      "All viewers of the dashboard can run queries using the analyst’s credentials, even if they don’t have access to the underlying data or SQL warehouse.",
+      "The dashboard will automatically be versioned, and users can revert to previous published versions.",
+      "Viewers will need to run queries using their own credentials to access the dashboard data and compute resources.",
+      "The published dashboard will be emailed to subscribers with limited access to the underlying data."
+    ],
+    "answer": 1,
+    "category": "Access Control",
+    "explanation": "Embedding credentials allows all viewers to access data and run queries using the analyst's permissions, simplifying access but raising security considerations."
+  },
+  {
+    "question": "A data analyst is tasked with combining data from two different source applications: a customer relationship management (CRM) system and an e-commerce platform. The goal is to create a unified view of customer transactions, where the CRM provides customer details and the e-commerce platform provides purchase history. What is the term used to describe this process of combining and integrating data from these two sources?",
+    "options": [
+      "Data migration",
+      "Partitioning",
+      "Data blending",
+      "Data archiving",
+      "Data deduplication"
+    ],
+    "answer": 2,
+    "category": "Data Integration",
+    "explanation": "Data blending involves combining data from multiple sources to create a unified view, which is essential when integrating CRM and e-commerce data."
+  },
+  {
+    "question": "A data analyst is analyzing a dataset and wants to summarize the central tendency and spread of the data. They decide to calculate the mean, median, standard deviation, and range. Which of the following statements best compares and contrasts these key statistical measures?",
+    "options": [
+      "The mean is used to calculate the average distance between data points, while the range measures the spread of the data based on quartiles.",
+      "The standard deviation measures the spread of the data, while the mean and median measure the central tendency, and the range provides the difference between the highest and lowest values.",
+      "The range and standard deviation both measure the central tendency, and the mean and median measure how spread out the data is.",
+      "The median and mean both measure the spread of the data, while the standard deviation gives the average value in the dataset.",
+      "The mean is always the best measure of central tendency, regardless of outliers, while the median is used only when all data points are identical."
+    ],
+    "answer": 1,
+    "category": "Statistics",
+    "explanation": "The standard deviation quantifies data spread, mean and median indicate central tendency, and range shows the extent of values from highest to lowest."
+  },
+  {
+    "question": "A data analyst has been asked to calculate the total sales amount for each product category and has written the following query: SELECT category, SUM(sales_amount) FROM product_sales ORDER BY category; If there is a mistake in the query, which of the following describes the mistake?",
+    "options": [
+      "There are no mistakes in the query.",
+      "The query is using SUM(sales_amount), which should be COUNT(sales_amount) to aggregate the data.",
+      "The query is selecting category, but category should only occur in the ORDER BY clause.",
+      "The query is missing a GROUP BY category clause.",
+      "The query is using ORDER BY, which is not allowed in an aggregation."
+    ],
+    "answer": 3,
+    "category": "SQL Query",
+    "explanation": "To calculate totals per category, a GROUP BY clause is necessary to group the data by each category before applying SUM."
+  },
+  {
+    "question": "Delta Lake stores table data as a series of data files, but it also stores additional information that is crucial for data management. Which of the following types of information is stored alongside data files when using Delta Lake?",
+    "options": [
+      "Schema history, performance statistics, and user activity logs",
+      "Data backup files, table metadata, and user access permissions",
+      "Table metadata, transaction logs, and schema history",
+      "Visualization summaries, query execution plans, and performance statistics",
+      "None of the above"
+    ],
+    "answer": 2,
+    "category": "Delta Lake",
+    "explanation": "Delta Lake retains table metadata, transaction logs, and schema history to support data versioning and ACID transactions, enabling data consistency and reliability."
+  },
+  {
+    "question": "An administrator needs to change access rights to a table within Databricks using the Catalog Explorer interface. Which of the following steps should they follow to modify the permissions for a specific user or group?",
+    "options": [
+      "Open the Catalog Explorer, locate the table, click on the 'Permissions' tab, and adjust the access rights by adding or modifying roles for specific users or groups.",
+      "Use a SQL command in a notebook to alter the permissions, as Catalog Explorer does not support changing access rights.",
+      "Access the table’s storage location in DBFS and manually update the access control list (ACL) for the data files.",
+      "Navigate to the Catalog tab, select the table, and directly edit the table’s metadata to change access rights.",
+      "Create a new version of the table with different access rights and replace the existing table with this new version."
+    ],
+    "answer": 0,
+    "category": "Access Control",
+    "explanation": "The 'Permissions' tab within Catalog Explorer allows administrators to manage user and group access to specific tables directly."
+  },
+  {
+    "question": "A data engineering team has built a Structured Streaming pipeline that processes data in micro-batches and updates gold-level tables every minute. A data analyst has created a dashboard based on this gold-level data. Stakeholders want the dashboard to reflect new data within one minute of it being available in the gold-level tables. Which caution should the data analyst raise before proceeding with this request?",
+    "options": [
+      "The dashboard cannot be refreshed that quickly.",
+      "The required compute resources could be costly.",
+      "The streaming data is not an appropriate data source for a dashboard.",
+      "The streaming cluster is not fault tolerant.",
+      "The gold-level tables are not appropriately clean for business reporting."
+    ],
+    "answer": 1,
+    "category": "Structured Streaming",
+    "explanation": "Frequent refreshes on a dashboard can be resource-intensive and costly, especially when working with real-time or near real-time data."
+  },
+  {
+    "question": "When creating a database in Databricks, how does the LOCATION keyword affect the default location of the database contents?",
+    "options": [
+      "The LOCATION keyword is used to specify a temporary storage location for the database contents, which is cleared when the session ends.",
+      "The LOCATION keyword is used to specify an alternative location for storing the database’s metadata only, while the actual data files are stored in the default location.",
+      "The LOCATION keyword specifies where the database logs are stored, but does not impact where the data files are stored.",
+      "The LOCATION keyword changes the storage location for both the database’s metadata and data files to the specified path, overriding the default storage location.",
+      "The LOCATION keyword only affects the storage of table indexes, while the actual data files remain in the default location."
+    ],
+    "answer": 3,
+    "category": "Database Management",
+    "explanation": "The LOCATION keyword allows users to define a custom path for storing both metadata and data files, providing flexibility in data organization and storage."
+  },
+  {
+    "question": "In Databricks, the persistence and scope of a table depend on how it is created and managed. Which of the following statements accurately describe the persistence and scope of different types of tables?",
+    "options": [
+      "Unmanaged tables are automatically deleted when the session ends, while managed tables and temporary tables persist across sessions.",
+      "Managed tables persist only within the session and store both data and metadata in the DBFS, while unmanaged tables store both data and metadata permanently in DBFS.",
+      "Temporary tables store data in the cloud permanently but restrict access to the current session.",
+      "Managed tables are stored temporarily in memory and are deleted when the session ends, while unmanaged tables store data permanently in DBFS.",
+      "Temporary tables are session-scoped and are automatically deleted when the session ends, while managed and unmanaged tables persist across sessions."
+    ],
+    "answer": 4,
+    "category": "Databricks Tables",
+    "explanation": "Temporary tables are session-scoped and only persist during the session, while managed and unmanaged tables can persist beyond the session."
+  },
+  {
+    "question": "A data analyst has set up a Databricks dashboard to auto-refresh periodically throughout the day. However, they have noticed that the associated SQL Warehouse is running constantly, leading to unexpectedly high costs, even during periods of inactivity when the dashboard is not being actively viewed. What should the analyst check to reduce these costs?",
+    "options": [
+      "Reduce the dashboard refresh interval to lower the frequency of query execution.",
+      "Check the SQL Warehouse auto stop setting to ensure it shuts down after periods of inactivity when the dashboard is not being actively refreshed.",
+      "Manually stop the SQL Warehouse after each dashboard refresh.",
+      "Disable the auto-refresh feature for the dashboard to prevent the SQL Warehouse from running constantly.",
+      "Increase the compute capacity of the SQL Warehouse to handle periods of inactivity more efficiently."
+    ],
+    "answer": 1,
+    "category": "SQL Warehouse",
+    "explanation": "Enabling the auto stop setting ensures that the SQL Warehouse automatically shuts down during periods of inactivity, reducing costs by avoiding unnecessary resource usage."
+  },
+  {
+    "question": "A data analytics team is utilizing gold-level tables from a Delta Live Tables pipeline built on the medallion architecture. Before completing their analysis, the team needs to perform final transformations and data processing on the gold tables. What is the term used to describe this type of work?",
+    "options": [
+      "Data enhancement",
+      "Data testing",
+      "Data blending",
+      "Last-mile ETL",
+      "Last-mile dashboarding"
+    ],
+    "answer": 3,
+    "category": "Data Processing",
+    "explanation": "Last-mile ETL refers to final processing steps that prepare data for reporting or analysis, ensuring it is fully refined and ready for end-use."
+  },
+  {
+    "question": "Which of the following best describes the purpose of the gold layer in the Databricks Lakehouse architecture?",
+    "options": [
+      "It is used exclusively for storing metadata related to datasets and table structures.",
+      "It is used for storing raw, unprocessed data as it is ingested from various sources.",
+      "It serves as a backup storage layer for historical data, ensuring data integrity and availability.",
+      "It is the layer where data is prepared and transformed, typically used for staging before further processing.",
+      "It is optimized for quick, scalable querying and analytics, where data is cleaned, aggregated, and ready for reporting."
+    ],
+    "answer": 4,
+    "category": "Lakehouse Architecture",
+    "explanation": "The gold layer in a Lakehouse architecture contains highly curated, processed data, ready for analytics and reporting, focusing on efficiency and accessibility."
+  },
+  {
+    "question": "A data analyst has added a parameter to a Databricks SQL dashboard that allows users to select a specific region when viewing the sales data. The parameter is configured to filter the data based on the region selected by the user. What is the behavior of this dashboard parameter?",
+    "options": [
+      "The parameter disables certain dashboard features when a region is selected.",
+      "The parameter caches the results for each region to speed up query performance.",
+      "The parameter updates the dashboard data in real-time based on the user’s input, filtering results according to the selected region.",
+      "The parameter only changes the visualization’s appearance but doesn’t affect the data displayed.",
+      "The parameter creates multiple dashboards for each region and switches between them based on the user’s selection."
+    ],
+    "answer": 2,
+    "category": "Dashboard Parameters",
+    "explanation": "The parameter dynamically filters the dashboard data in real-time according to the user-selected region, allowing for interactive and customizable data views."
+  },
+  {
+    "question": "A data analyst is working with two different datasets. One dataset contains the number of customers visiting a store each day, while the other contains the daily revenue generated by the store. What is the key difference between the types of statistics the analyst will use to analyze these datasets?",
+    "options": [
+      "Discrete data can only be visualized in bar charts, while continuous data can only be visualized in line charts.",
+      "Discrete data involves percentages, while continuous data always involves ratios.",
+      "Discrete data deals with whole numbers and categories, while continuous data involves data that can take any value within a range.",
+      "Discrete data is used to measure time-related metrics, while continuous data measures frequency.",
+      "Discrete data represents trends, while continuous data represents absolute values."
+    ],
+    "answer": 2,
+    "category": "Data Types",
+    "explanation": "Discrete data consists of countable values, such as customer counts, while continuous data can take any value within a range, like revenue."
+  },
+  {
+    "question": "A data analyst has created a dashboard in Databricks to showcase key business metrics, but the stakeholders find it difficult to navigate because the dashboard lacks structure and visual clarity. What is the best approach to enhance the dashboard’s formatting?",
+    "options": [
+      "Embed the explanations and instructions within the axis labels of the charts.",
+      "Add markdown text to create well-structured headings, titles, and explanatory notes for the dashboard.",
+      "Modify the SQL queries to include formatted text outputs for better presentation.",
+      "Change the font size of the visualization labels to increase readability.",
+      "Use only color schemes in visualizations to differentiate sections of the dashboard."
+    ],
+    "answer": 1,
+    "category": "Dashboard Design",
+    "explanation": "Adding markdown text allows for clear structure through headings, titles, and explanatory notes, improving user navigation and understanding."
+  },
+  {
+    "question": "An analyst is working in Databricks and frequently runs similar queries on a large dataset while developing a new report. To optimize their workflow and reduce query latency, they want to leverage query history and caching. Which of the following strategies would best achieve this goal?",
+    "options": [
+      "Rely on query history to copy and paste past queries into new notebooks, ensuring consistent query structure without the need for caching.",
+      "Enable result caching to store the results of frequently run queries in memory, reducing the need to re-execute the underlying computations.",
+      "Use query history to export past query results and manually import them into new sessions to avoid rerunning queries.",
+      "Review query history to identify frequently run queries and set up automatic execution to pre-load results into memory.",
+      "Disable caching to force every query to run from scratch, ensuring data freshness and accuracy in development."
+    ],
+    "answer": 1,
+    "category": "Query Optimization",
+    "explanation": "Enabling result caching reduces latency by storing results in memory, which is optimal for repetitive query executions."
+  },
+  {
+    "question": "Which of the following best describes the capability of a Lakehouse architecture, particularly within Databricks, regarding data processing workloads?",
+    "options": [
+      "It allows for the seamless integration of batch and streaming workloads within a unified platform.",
+      "It exclusively supports real-time streaming workloads, designed for continuous data ingestion and analysis.",
+      "It requires manual synchronization between batch and streaming processes, with limited automation.",
+      "It separates batch and streaming workloads, requiring dedicated environments for each type of processing.",
+      "It restricts data processing to batch workloads only, optimizing for large-scale batch processing."
+    ],
+    "answer": 0,
+    "category": "Lakehouse Architecture",
+    "explanation": "Lakehouse architecture unifies batch and streaming data processing, enabling seamless integration and efficient handling of various data workloads."
+  },
+  {
+    "question": "An analyst needs to flatten a nested array structure within the order_items column of the orders table, so that each item appears as a separate row. Which function should be used to complete the following SQL query?",
+    "options": [
+      "group_by",
+      "json_tuple",
+      "explode",
+      "cast",
+      "from_json"
+    ],
+    "answer": 2,
+    "category": "Data Transformation",
+    "explanation": "The explode function is used to flatten nested array structures, creating individual rows for each element within an array."
+  },
+  {
+    "question": "A data analyst has created a dashboard in Databricks and needs to share it with stakeholders who do not have access to the workspace or the underlying compute resources. The analyst is considering whether to embed their credentials when sharing the dashboard. What is a key consideration when deciding whether or not to embed credentials?",
+    "options": [
+      "Embedding credentials disables real-time updates to the dashboard.",
+      "Embedding credentials forces viewers to have individual compute resources for dashboard refreshes.",
+      "Not embedding credentials will allow users without workspace access to still view the dashboard, as it relies on the analyst’s data access.",
+      "Embedding credentials allows all viewers to use the same shared cache for maximum efficiency and access the dashboard, even if they don’t have access to the workspace.",
+      "Not embedding credentials ensures the dashboard is always accessible, regardless of compute resource availability."
+    ],
+    "answer": 2,
+    "category": "Access Control",
+    "explanation": "Embedding credentials ensures all users have access to the dashboard efficiently, even without access to the underlying workspace or resources."
+  },
+  {
+    "question": "What is the primary method for importing data from object storage into Databricks SQL?",
+    "options": [
+      "Utilizing the COPY INTO command to load data from object storage into a Databricks SQL table.",
+      "Writing a custom Python script to handle the import of data from object storage into Databricks SQL.",
+      "Using Databricks SQL to create a direct connection to the object storage without any intermediate steps.",
+      "Manually downloading the data from object storage and uploading it into Databricks SQL.",
+      "Configuring an external API to automatically sync data from object storage to Databricks SQL."
+    ],
+    "answer": 0,
+    "category": "Data Import",
+    "explanation": "The COPY INTO command is specifically designed for efficiently importing data from object storage directly into Databricks SQL tables."
+  },
+  {
+    "question": "A data analyst is working with a customer transaction dataset that includes basic information such as customer ID, purchase amount, and transaction date. The marketing team wants to run more targeted campaigns based on customer demographics and purchasing behavior patterns. In which of the following scenarios would data enhancement be most beneficial?",
+    "options": [
+      "To convert the purchase amount into a different currency for international reports.",
+      "To remove duplicate customer IDs from the dataset to improve data quality.",
+      "To reduce the size of the dataset by aggregating transaction data on a monthly basis.",
+      "To add additional columns with customer age, income level, and location to create more personalized marketing campaigns.",
+      "To split the transaction date into separate columns for day, month, and year."
+    ],
+    "answer": 3,
+    "category": "Data Enhancement",
+    "explanation": "Adding demographic columns allows for the creation of more targeted and personalized marketing campaigns based on customer segmentation."
+  },
+  {
+    "question": "A data analyst wants to visualize the results of several SQL queries simultaneously in Databricks SQL. Which feature should the analyst use to achieve this?",
+    "options": [
+      "Query History",
+      "Alerts",
+      "Data Explorer",
+      "Dashboards",
+      "SQL Editor"
+    ],
+    "answer": 3,
+    "category": "Data Visualization",
+    "explanation": "Dashboards enable the simultaneous display of multiple query results, allowing analysts to view and compare data insights side-by-side."
+  },
+  {
+    "question": "An analyst is working with a large dataset containing nested arrays in Spark SQL. To improve performance when processing these arrays, the analyst wants to apply a function to each element of an array and return a transformed array. Which of the following higher-order Spark SQL functions should the analyst use to optimize performance?",
+    "options": [
+      "MAP() to transform the values of a map column, optimizing key-value pair processing.",
+      "ARRAY_CONTAINS() to check if an array contains a specific value, optimizing filtering operations.",
+      "TRANSFORM() to apply a function to each element of an array, returning a new array with the transformed elements.",
+      "AGGREGATE() to reduce the elements of an array into a single value, applying a binary function.",
+      "EXPLODE() to flatten the array into individual rows for further processing."
+    ],
+    "answer": 2,
+    "category": "Spark SQL Functions",
+    "explanation": "TRANSFORM() is specifically designed to apply a transformation function to each element of an array, making it optimal for element-wise array transformations."
+  },
+  {
+    "question": "When handling Personally Identifiable Information (PII) data within an organization, which of the following considerations is most crucial to ensure compliance and data protection?",
+    "options": [
+      "PII data should be stored in a separate database with a lower backup frequency to reduce storage costs.",
+      "Access to PII data should be restricted based on user roles, with regular audits to ensure compliance with data protection regulations.",
+      "PII data should be freely shared across departments to ensure that all business units have access to the same information for decision-making.",
+      "PII data should only be stored on local servers to prevent exposure in cloud environments.",
+      "PII data should be anonymized only when shared outside the organization, but not when used internally."
+    ],
+    "answer": 1,
+    "category": "Data Compliance",
+    "explanation": "Restricting access to PII data based on user roles and conducting regular audits is essential for compliance with data protection regulations and to ensure security."
+  },
+  {
+    "question": "Which of the following statements correctly identifies a key feature of Delta Lake tables regarding data history?",
+    "options": [
+      "Delta Lake tables only maintain history for the last transaction, discarding any earlier versions of the data.",
+      "Delta Lake tables automatically delete all historical data once a new version of the table is created.",
+      "Delta Lake tables maintain a history of changes, allowing users to access and query previous versions of the data for a configurable period of time.",
+      "Delta Lake tables store historical data indefinitely, without any option to configure the retention period.",
+      "Delta Lake tables do not maintain any historical versions of the data once the table is updated."
+    ],
+    "answer": 2,
+    "category": "Delta Lake",
+    "explanation": "Delta Lake provides time travel functionality, enabling users to query historical versions of data within a configurable retention period."
+  },
+  {
+    "question": "What is a key benefit of having ANSI SQL as the standard query language in a Lakehouse architecture?",
+    "options": [
+      "It provides a more secure environment by limiting access to certain SQL functions.",
+      "It reduces the ability to perform real-time analytics in the Lakehouse.",
+      "It forces the use of proprietary SQL extensions, making the system more vendor-dependent.",
+      "It restricts the use of complex queries, ensuring that only basic operations can be performed.",
+      "It ensures compatibility with legacy databases and allows analysts to use familiar SQL syntax across different platforms."
+    ],
+    "answer": 4,
+    "category": "SQL Compatibility",
+    "explanation": "ANSI SQL compatibility allows for greater flexibility and interoperability, making it easier for analysts to use existing SQL knowledge across multiple platforms."
+  },
+  {
+    "question": "Which of the following is required to set up a partner for use with Partner Connect in Databricks?",
+    "options": [
+      "An active Databricks workspace with admin-level permissions.",
+      "A configured SQL warehouse with the CAN CREATE permission.",
+      "A direct API connection to the partner’s platform.",
+      "A pre-configured cluster specifically set up for partner integration.",
+      "The partner application must be available in the Databricks Partner Connect interface."
+    ],
+    "answer": 4,
+    "category": "Partner Integration",
+    "explanation": "For Partner Connect integration, the partner application must be accessible via Databricks' Partner Connect interface, facilitating setup and connection."
+  },
+  {
+    "question": "What is one advantage of Databricks SQL utilizing ANSI SQL as its standard SQL dialect?",
+    "options": [
+      "It simplifies the migration of existing SQL queries to Databricks SQL.",
+      "It enables the use of Photon’s computation optimizations.",
+      "It provides better performance compared to other SQL dialects.",
+      "It offers greater customization options.",
+      "It ensures better compatibility with Spark’s interpreters."
+    ],
+    "answer": 0,
+    "category": "SQL Compatibility",
+    "explanation": "Using ANSI SQL as the standard dialect simplifies the migration process for queries from other SQL environments to Databricks, ensuring compatibility and reducing the need for query rewrites."
+  },
+  {
+    "question": "A data analyst is creating a new visualization in Databricks SQL for a dashboard to show total sales by product category. After running the SQL query to retrieve the sales data, the analyst quickly wants to visualize the results without manually selecting a chart type. Which type of visualization will be automatically selected as the default?",
+    "options": [
+      "Pivot table",
+      "Pie chart",
+      "Table",
+      "Bar chart",
+      "Line chart"
+    ],
+    "answer": 2,
+    "category": "Data Visualization",
+    "explanation": "By default, Databricks often selects the 'Table' view for a quick representation of SQL query results, as it allows for easy inspection of data."
+  },
+  {
+    "question": "A data analyst is working within Databricks SQL and is exploring the Schema Browser from the Query Editor page. The analyst wants to understand what kind of information is displayed in the Schema Browser. Which of the following types of information can the analyst view in the Schema Browser on the Query Editor page?",
+    "options": [
+      "Information about running queries",
+      "Details of SQL alerts",
+      "Available schemas and their tables",
+      "Active dashboard visualizations",
+      "List of available catalogs"
+    ],
+    "answer": [
+      2,
+      4
+    ],
+    "category": "Schema Browser",
+    "explanation": "The Schema Browser in Databricks SQL provides information on available schemas and their tables, as well as a list of catalogs, assisting users in database navigation."
+  },
+  {
+    "question": "A data analyst is setting up a new Databricks SQL environment and wants to minimize the startup time for executing SQL queries. Which of the following options should the analyst choose to ensure quick and efficient query execution with minimal startup delays?",
+    "options": [
+      "Set up a single-node cluster with autoscaling.",
+      "Use a Serverless Databricks SQL warehouse.",
+      "Configure a Databricks job cluster.",
+      "Deploy a standard Databricks SQL endpoint.",
+      "Create a high-concurrency cluster."
+    ],
+    "answer": 1,
+    "category": "Cluster Configuration",
+    "explanation": "A Serverless Databricks SQL warehouse minimizes startup time by automatically managing resources and eliminating the need for manual cluster setup, ideal for SQL queries."
+  },
+  {
+    "question": "A data analyst has been asked to visualize the energy flow between different sources and consumers in a power grid. Which of the following visualization types is most appropriate for representing this type of flow?",
+    "options": [
+      "Heatmap",
+      "Sankey",
+      "Pivot Table",
+      "Choropleth",
+      "Word Cloud"
+    ],
+    "answer": 1,
+    "category": "Data Visualization",
+    "explanation": "A Sankey diagram is ideal for visualizing flow between sources and destinations, showing the magnitude of flow between them, which is suitable for energy flow representation."
+  }
+]
